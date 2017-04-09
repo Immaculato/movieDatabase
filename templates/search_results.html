@@ -1,0 +1,19 @@
+<html>     
+    <head>         
+    <title>Genre Search</title>     
+    </head>     
+    <body>       
+        <p>You searched for: <strong>{{ query }}</strong></p>
+   
+        {% if genres %}           
+            <p>Found {{ genres|length }} genre{{ genres|pluralize }}.</p>
+            <ul>               
+                {% for genre in genres %}               
+                <li>{{ genre.g_name }}</li>               
+                {% endfor %}           
+            </ul>       
+        {% else %}           
+            <p>No genres matched your search criteria.</p>       
+        {% endif %}     
+    </body>
+</html>
