@@ -35,7 +35,7 @@ Finally, install Django.
 
 * [Python](https://www.python.org/) - The programming language used.
 * [Django](https://www.djangoproject.com/) - The web framework used.
-* [Virtual Environment](http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) - Virtual environment used.
+* [Virtual Environment](http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) - a tool to keep the dependencies required by different projects in separate places
 
 
 
