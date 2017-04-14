@@ -2,14 +2,10 @@
 <html>
 <body>
 
-<form action="/action_page.php" method="post">
-   username:<br>
-  <input type="text" name="username" >
-  <br>
-  password:<br>
-  <input type="text" name="password" >
-  <br><br>
-  <input type="submit" value="Submit">
+<form action="/login/" method="post" />
+	{% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Log in" />
 </form> 
 
 </body>

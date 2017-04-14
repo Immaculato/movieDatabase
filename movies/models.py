@@ -32,7 +32,6 @@ class Movie_Has_Tag(models.Model):
 	m_id = models.ManyToManyField(Movie)	
 	t_id = models.ManyToManyField(Tag)
 
-
 class Crew(models.Model):
 	c_first_name = models.CharField(max_length=15)
 	c_last_name = models.CharField(max_length=15)
@@ -49,15 +48,17 @@ class User(models.Model):
 	('F', 'Female'),
 	('O', 'Other'),
 	)
-	u_first_name = models.CharField(max_length=15)
-	u_middle_name = models.CharField(max_length=15)
-	u_last_name = models.CharField(max_length=15)
-	dob = models.DateField()
+	first_name = models.CharField(max_length=15)
+	middle_name = models.CharField(max_length=15)
+	last_name = models.CharField(max_length=15)
+	email = models.CharField(max_length=30,null=True)
+	password = models.CharField(max_length=20,null=True)
+	date_of_birth = models.DateField()
 	manager = models.BooleanField(default=False)
 	sex = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
 	
 	def __str__(self):
-		return u'%s %s' % (self.u_first_name, self.u_last_name)
+		return u'%s %s' % (self.first_name, self.last_name)
 
 class Review(models.Model):
 	description = models.CharField(max_length=200)

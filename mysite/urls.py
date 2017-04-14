@@ -25,5 +25,6 @@ urlpatterns = [
 	url(r'^time/$', current_datetime),
 	url(r'^time/plus/(\d{1,2})/$', hours_ahead),
 	url(r'^login/$', log_in),
+	url(r'^register/$', register),
 	url(r'^search/$', search),
 ]
