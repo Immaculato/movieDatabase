@@ -18,13 +18,13 @@ from django.contrib import admin
 from mysite.views import *
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
-#    url(r'^$/', admin.site.urls),
-#	url(r'^admin/', include(admin.site.urls)),
+	url(r'^register/$', register),
 	url(r'^homepage/$', home_page),
 	url(r'^hello/$', hello),
 	url(r'^time/$', current_datetime),
 	url(r'^time/plus/(\d{1,2})/$', hours_ahead),
 	url(r'^login/$', log_in),
-	url(r'^register/$', register),
 	url(r'^search/$', search),
+        url(r'^movie/$', movie),
+        url(r'^movies_by_genres/$', movies_by_genres),
 ]

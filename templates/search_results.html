@@ -1,19 +1,40 @@
-<html>     
+<html>    
     <head>         
     <title>Genre Search</title>     
-    </head>     
-    <body>       
+    </head>    
+    <body>    
         <p>You searched for: <strong>{{ query }}</strong></p>
-   
-        {% if genres %}           
+
+        {% if genres %}    
             <p>Found {{ genres|length }} genre{{ genres|pluralize }}.</p>
-            <ul>               
-                {% for genre in genres %}               
-                <li>{{ genre.g_name }}</li>               
-                {% endfor %}           
+            <ul>    
+               {% for genre in genres %}    
+                <li><a class="btn-link" href="/movies_by_genres/?g_id={{ genre.id }}"> {{genre.g_name}} </a></li>        
+                {% endfor %}    
+            </ul>    
+
+        {% elif movies %}    
+            <p>Found {{ movies|length }} movie{{ movies|pluralize }}.</p>
+            <ul>    
+                {% for movie in movies %}    
+                <li><a class="btn-link" href="/movie/?id={{ movie.id }}"> {{movie.title}} </a></li>                 {% endfor %}
             </ul>       
-        {% else %}           
-            <p>No genres matched your search criteria.</p>       
-        {% endif %}     
-    </body>
-</html>
+        {% elif crews %}
+            <p>Found {{ crews|length }} crew{{ crews|pluralize }}.</p>
+            <ul>               
+                {% for crew in crews %}
+                <li><a class="btn-link" href="/movie/?id={{ crew.id }}"> {{crew.c_first_name}} </a></li>                
+                {% endfor %}
+            </ul>       
+        {% elif tags %}
+            <p>Found {{ tags|length }} tag{{ tags|pluralize }}.</p>
+            <ul>               
+                {% for tag in tags %}
+                <li><a class="btn-link" href="/movie/?id={{ tag.id }}"> {{tag.t_name}} </a></li>
+                {% endfor %}           
+            </ul>
+        {% else %}            
+            <p>Nothing matched your search criteria.</p>
+        {% endif %}   
+    </body>     
+</html>  
