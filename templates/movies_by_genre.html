@@ -1,0 +1,18 @@
+<html>    
+    <head>         
+    <title>Genre Search</title>     
+    </head>    
+    <body>    
+        <p>Genre ID: <strong>{{ ID }}</strong></p>
+
+        {% if movies %}    
+            <p>Found {{ movies|length }} movie{{ movies|pluralize }}.</p>
+            <ul>    
+                {% for movie in movies %}    
+                <li><a class="btn-link" href="/movie/?id={{ movie.id }}"> {{movie.title}} </a></li>                 {% endfor %}
+            </ul>       
+        {% else %}   
+            <p>Nothing matched your search criteria.</p>
+        {% endif %}     
+    </body> 
+</html> 
