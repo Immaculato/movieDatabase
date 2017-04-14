@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from movies.models import User
+from movies.models import User, Movie
 
 class LoginForm(forms.Form):
 	email = forms.EmailField(label='Email', max_length=30)
