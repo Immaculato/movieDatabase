@@ -76,18 +76,25 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-#        'ENGINE': 'django.db.backends.mysql', 
-#        'NAME': 'movies',
-#        'USER': 'root',
-#        'PASSWORD': 'lucian',
-#        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-#        'PORT': '3306',
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+if not 'USE_MYSQL' in os.environ:
+	DATABASES = {
+	    'default': {
+	        'ENGINE': 'django.db.backends.sqlite3',
+	        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	    }
+	}
+else:
+	print("Using mysql")
+	DATABASES = {
+	    'default': {
+	        'ENGINE': 'django.db.backends.mysql', 
+	        'NAME': 'movies',
+	        'USER': 'root',
+	        'PASSWORD': 'lucian',
+	        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+	        'PORT': '3306',
+	    }
+	}
 
 
 # Password validation
