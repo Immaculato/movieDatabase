@@ -16,14 +16,6 @@ class Tag(models.Model):
 	def __str__(self):
 		return self.t_name
 
-class Review(models.Model):
-	description = models.CharField(max_length=200)
-	rating = models.IntegerField(validators=[MinValueValidator(0),
-                                       MaxValueValidator(10)])
-	
-	def __str__(self):
-		return self.description
-
 class Movie(models.Model):
 	title = models.CharField(max_length=30)
 	description = models.CharField(max_length=250)
@@ -32,26 +24,11 @@ class Movie(models.Model):
 	genre = models.ManyToManyField(Genre)
 	tag = models.ManyToManyField(Tag)
 
-	review = models.ForeignKey(Review, on_delete=models.CASCADE, default=None, blank=True, null=True)
+
+#	review = models.ForeignKey(Review, on_delete=models.CASCADE, default=None, blank=True, null=True)
 
 	def __str__(self):
 		return '%s (%s)' % (self.title,self.release_date.year)
-
-
-
-#class Movie_Has_Tag(models.Model):
-#	m_id = models.ManyToManyField(Movie)	
-#	t_id = models.ManyToManyField(Tag)
-
-class Crew(models.Model):
-	crew_first_name = models.CharField(max_length=15)
-	crew_last_name = models.CharField(max_length=15)
-	role = models.CharField(max_length=15)
-
-	m_id = models.ManyToManyField(Movie)
-
-	def __str__(self):
-		return u'%s %s' % (self.crew_first_name, self.crew_last_name)
 
 class User(models.Model):
 	GENDER_CHOICES = (
@@ -67,9 +44,37 @@ class User(models.Model):
 	date_of_birth = models.DateField()
 	manager = models.BooleanField(default=False)
 	sex = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
-	review = models.ForeignKey(Review, on_delete=models.CASCADE, default=None, blank=True, null=True)
+
 	
 	def __str__(self):
 		return u'%s %s' % (self.first_name, self.last_name)
+
+
+class Review(models.Model):
+	description = models.CharField(max_length=200)
+	rating = models.IntegerField(validators=[MinValueValidator(0),
+                                       MaxValueValidator(10)])
+	user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
+	movie = models.ForeignKey(Movie, on_delete=models.CASCADE, default=None, blank=True, null=True)
+
+	def __str__(self):
+		return self.description
+
+
+
+
+
+#class Movie_Has_Tag(models.Model):
+#	m_id = models.ManyToManyField(Movie)	
+#	t_id = models.ManyToManyField(Tag)
+
+class Crew(models.Model):
+	crew_first_name = models.CharField(max_length=15)
+	crew_last_name = models.CharField(max_length=15)
+	role = models.CharField(max_length=15)
+	m_id = models.ManyToManyField(Movie)
+
+	def __str__(self):
+		return u'%s %s' % (self.crew_first_name, self.crew_last_name)
 
 
