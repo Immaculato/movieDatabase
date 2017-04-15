@@ -3,8 +3,8 @@ from django.forms import ModelForm
 from movies.models import User, Movie, Crew
 
 class LoginForm(forms.Form):
-	email = forms.EmailField(label='Email', max_length=30)
-	password = forms.CharField(label='Password', max_length=20)
+	email = forms.EmailField(label='EMAIL', max_length=30)
+	password = forms.CharField(label='PASSWORD', max_length=20)
 
 class RegisterForm(ModelForm):
     class Meta:
