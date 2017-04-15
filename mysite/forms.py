@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from movies.models import User, Movie
+from movies.models import User, Movie, Crew
 
 class LoginForm(forms.Form):
 	email = forms.EmailField(label='Email', max_length=30)
@@ -15,6 +15,12 @@ class MovieForm(ModelForm):
     class Meta:
         model = Movie
         fields = ['title','description','release_date','language','genre']
+
+class CrewForm(ModelForm):
+	class Meta:
+		model = Crew
+		labels = {'m_id': 'Movies'}
+		fields = ['crew_first_name','crew_last_name','role','m_id']
 
 #class RegisterForm(forms.Form):
 #	GENDER_CHOICES = (

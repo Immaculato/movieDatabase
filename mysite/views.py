@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse  
 import datetime
 from movies.models import Genre, Movie, Tag, Movie_Has_Tag, Crew, User
-from mysite.forms import LoginForm, RegisterForm
-
-
+from mysite.forms import LoginForm, RegisterForm, MovieForm, CrewForm
 
 def hello(request):
 	return HttpResponse("Hello world")
@@ -44,6 +42,28 @@ def register(request):
 		form = RegisterForm()
 
 	return render(request,'register.html', {'form':form})
+
+def edit_crew(request):
+	if request.method == 'POST':
+		crew_form = CrewForm(request.POST);
+		if crew_form.is_valid():
+			crew_form.save()
+		else:
+			return HttpResponse('Invalid form input')
+	else:
+		crew_form = CrewForm();
+
+	return render(request,'edit_crew.html',{'crew_form':crew_form})
+
+def edit_movie(request):
+	if request.method == 'POST':
+		form = MovieForm(request.POST);
+	else:
+		form = MovieForm();
+
+	return render(request,'edit_movie.html',{'form':form})
+
+
 def search(request):
 	if 'search_type' in request.GET:
 		search_type = request.GET['search_type']
@@ -75,7 +95,7 @@ def search(request):
 		    return render(request, 'search_results.html',
 				  {'tags': tags, 'query': q})
 		elif option == 4:
-		    crew_first_name = Crew.objects.filter(c_first_name__icontains=q)
+		    crew_first_name = Crew.objects.filter(crew_first_name__icontains=q)
 		    return render(request, 'search_results.html',
 				  {'crews': crew_first_name, 'query': q})
 	return render(request, 'search_form.html', {'errors': errors})
@@ -97,9 +117,3 @@ def movies_by_genres(request):
 		results = Movie.objects.filter(genre__id=ID)
 		return render(request, 'movies_by_genre.html',
                              {'movies': results, 'ID': ID})
-
-
-
-
-
-

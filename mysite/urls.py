@@ -21,6 +21,8 @@ urlpatterns = [
 	url(r'^register/$', register),
 	url(r'^homepage/$', home_page),
 	url(r'^login/$', log_in),
+	url(r'^edit_movie/$', edit_movie),
+	url(r'^edit_crew/$', edit_crew),
 	url(r'^search/$', search),
         url(r'^movie/$', movie),
         url(r'^movies_by_genres/$', movies_by_genres),

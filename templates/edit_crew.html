@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="/edit_crew/" method="post" />
+	{% csrf_token %}
+	<table>
+	    {{ crew_form.as_table }}
+	    <!{{ movie_form.as_table }}>
+	</table>
+	<input type="submit" value="Submit Crew Member" />
+</form> 
+
+</body>
+</html>

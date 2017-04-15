@@ -20,7 +20,7 @@ class Movie(models.Model):
 	genre = models.ManyToManyField(Genre)
 
 	def __str__(self):
-		return self.title
+		return '%s (%s)' % (self.title,self.release_date.year)
 
 class Tag(models.Model):
 	t_name = models.CharField(max_length=15, unique=True)
@@ -33,14 +33,14 @@ class Movie_Has_Tag(models.Model):
 	t_id = models.ManyToManyField(Tag)
 
 class Crew(models.Model):
-	c_first_name = models.CharField(max_length=15)
-	c_last_name = models.CharField(max_length=15)
+	crew_first_name = models.CharField(max_length=15)
+	crew_last_name = models.CharField(max_length=15)
 	role = models.CharField(max_length=15)
 
 	m_id = models.ManyToManyField(Movie)
 
 	def __str__(self):
-		return u'%s %s' % (self.c_first_name, self.c_last_name)
+		return u'%s %s' % (self.crew_first_name, self.crew_last_name)
 
 class User(models.Model):
 	GENDER_CHOICES = (
