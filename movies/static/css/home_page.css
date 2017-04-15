@@ -1,0 +1,48 @@
+.jumbotron h1 {
+    color: white;
+}
+
+.jumbotron{
+    background-color: #042CC9;
+    margin-top: 0;
+}
+
+.jumbotron p{
+    color: #E0E0E0;
+}
+
+.navbar{
+    margin-bottom: 0;
+}
+
+a:hover{
+    color: blue;
+}
+
+a:visited{
+    color:blue;
+}
+
+.abt-container{
+    margin:0 auto;
+    background-color: #CACACC;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    float: none;
+    width : 80%;
+    border-radius: 3px;
+}
+
+.creat-container{
+    margin:0 auto;
+    margin-top: 10px;
+    width: 80%;
+    float: none;
+    border-radius: 3px;
+    padding-top: 5px;
+
+    background-color: #CACACC;
+}
+
+
+
