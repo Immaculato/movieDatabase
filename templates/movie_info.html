@@ -1,9 +1,15 @@
 <html>
-    <head>         
-    <title>Movie Information</title>     
-    </head>     
-    <body>       
-        <p>You searched for: <strong>{{ ID }}</strong></p> 
-        <p>You searched for: <strong>{{ movie.title }} </strong></p>
-    </body>
+<head>
+<title>Movie Information</title>
+</head>
+<body>
+    <p>You searched for: {{movie.title}} </p>
+    <h2>{{movie.title}} ({{movie.release_date}})</h2>
+    <h3> GENRE: {% for g in genre %}
+                    {{g.g_name}} 
+                {% endfor %}, 
+                LANGUAGE: {{movie.language}}</h3>
+    <p>{{movie.description}}</p>
+
+</body>
 </html>
