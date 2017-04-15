@@ -3,36 +3,30 @@
     <title>Genre Search</title>     
     </head>    
     <body>    
-        <p>You searched for: <strong>{{ query }}</strong></p>
+        <p>You searched for:
 
-        {% if genres %}    
-            <p>Found {{ genres|length }} genre{{ genres|pluralize }}.</p>
-            <ul>    
-               {% for genre in genres %}    
-                <li><a class="btn-link" href="/movies_by_genres/?g_id={{ genre.id }}"> {{genre.g_name}} </a></li>        
-                {% endfor %}    
-            </ul>    
+		<li>
+		Genre: {% for g in genre %} {{ g.g_name }} {% endfor %} 
+		</li>
+		<li>
+		Tag: {{ tag }} 
+		</li>
+		<li>
+		Crew: {{ crew }}
+		</li>
+		<li>
+		Title: {{ title }}
+		</li>
 
-        {% elif movies %}    
+	</p>
+
+
+        {% if movies %}    
             <p>Found {{ movies|length }} movie{{ movies|pluralize }}.</p>
             <ul>    
                 {% for movie in movies %}    
                 <li><a class="btn-link" href="/movie/?id={{ movie.id }}"> {{movie.title}} </a></li>                 {% endfor %}
             </ul>       
-        {% elif crews %}
-            <p>Found {{ crews|length }} crew{{ crews|pluralize }}.</p>
-            <ul>               
-                {% for crew in crews %}
-                <li><a class="btn-link" href="/movie/?id={{ crew.id }}"> {{crew.crew_first_name}} </a></li>                
-                {% endfor %}
-            </ul>       
-        {% elif tags %}
-            <p>Found {{ tags|length }} tag{{ tags|pluralize }}.</p>
-            <ul>               
-                {% for tag in tags %}
-                <li><a class="btn-link" href="/movie/?id={{ tag.id }}"> {{tag.t_name}} </a></li>
-                {% endfor %}           
-            </ul>
         {% else %}            
             <p>Nothing matched your search criteria.</p>
         {% endif %}   

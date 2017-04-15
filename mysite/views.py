@@ -144,40 +144,37 @@ def edit_movie(request):
 		return HttpResponse('Must be logged in as a manager to edit movies')
 
 def search(request):
-	if 'search_type' in request.GET:
-		search_type = request.GET['search_type']
-		if (search_type == "Title"):
-			option = 1
-		elif (search_type == "Genre"):
-			option = 2
-		elif (search_type == "Tag"):
-			option = 3
-		elif (search_type == "Crew"):
-			option = 4
 	errors = []
-	if 'q' in request.GET:
-		q = request.GET['q']
-		if not q:
-		    errors.append('Enter a search term.')
-		elif len(q) > 15:
-		    errors.append('Please enter at most 15 characters.')
-		elif option == 1:
-		    m_title = Movie.objects.filter(title__icontains=q)
-		    return render(request, 'search_results.html',
-				  {'movies': m_title, 'query': q})
-		elif option == 2:
-		    genres = Genre.objects.filter(g_name__icontains=q)
-		    return render(request, 'search_results.html',
-				  {'genres': genres, 'query': q})
-		elif option == 3:
-		    tags = Tag.objects.filter(t_name__icontains=q)
-		    return render(request, 'search_results.html',
-				  {'tags': tags, 'query': q})
-		elif option == 4:
-		    crew_first_name = Crew.objects.filter(crew_first_name__icontains=q)
-		    return render(request, 'search_results.html',
-				  {'crews': crew_first_name, 'query': q})
-	return render(request, 'search_form.html', {'errors': errors})
+	if 'Search' in request.GET:
+
+		movies = Movie.objects.all()
+		if 'g_id' in request.GET:
+			g_ids = request.GET.getlist('g_id')
+			movies = movies.filter(genre__id__in=g_ids)
+			#genres = Genre.objects.filter(id__in=g_ids)	
+		if 'tag_q' in request.GET:
+			tag_q = request.GET['tag_q']
+			movies = movies.filter(tag__t_name__icontains=tag_q)
+			#tag = Tag.objects.filter(t_name__icontains=tag_q)	
+		if 'crew_q' in request.GET:
+			crew_q = request.GET['crew_q']
+			movies = movies.filter(crew__crew_first_name__icontains=crew_q)
+			#crew_first_name = Crew.objects.filter(crew_first_name__icontains=crew_q)
+		if 'title_q' in request.GET:
+			title_q = request.GET['title_q']
+			movies = movies.filter(title__icontains=title_q)
+			#m_title = Movie.objects.filter(title__icontains=title_q)
+		return render(request, 'search_results.html', {'genre': Genre.objects.filter(id__in=g_ids), 
+								'tag': tag_q,
+								'crew': crew_q,
+								'title': title_q,
+								'movies': movies, })
+
+	else:
+
+		genres = Genre.objects.all()	
+		return render(request, 'search_form.html', {'errors': errors,
+							    'genres': genres,})
 
 
 def movie(request):

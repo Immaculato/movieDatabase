@@ -10,16 +10,24 @@
                         {% endfor %}
                 </ul>
         {% endif %}
-        <form action="/search/" method="get">
-                <input type="radio" name="search_type" value="Title"> Movie Title
-                <input type="radio" name="search_type" value="Genre"> Genre
-                <input type="radio" name="search_type" value="Tag"> Tag 
-                <input type="radio" name="search_type" value="Crew"> Crew <br>
+        <form action="/search/" method="get">	
+		<strong>Select genre(s): </strong>
+		<br>
+		{% for genre in genres %}
+			<input type="checkbox" name='g_id' value={{genre.id}}> {{genre.g_name}}<br>
+		{% endfor %}
                 <br>
-                Genre Search 
-                <input type="text" name="q">
-                <input type="submit" value="Search">
+                Tag Search:
+                <input type="text" name="tag_q">
                 <br>
+		Crew Search:
+		<input type="text" name="crew_q">
+		<br>
+		Title Search:
+		<input type="text" name="title_q">
+		<br>
+		<input type="submit" name="Search">	
+		<br>
         </form>
 </body>
 </html>
