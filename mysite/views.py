@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse  
 import datetime
-from movies.models import Genre, Movie, Tag, Movie_Has_Tag, Crew
+from movies.models import Genre, Movie, Tag, Movie_Has_Tag, Crew, User
+from mysite.forms import LoginForm, RegisterForm
 
 
 
@@ -15,27 +16,34 @@ def home_page(request):
 	return render(request, 'home_page.html')
 
 def log_in(request):
-	return render(request, 'log_in.html')
-
-def get_log_in_info(request):
 	if request.method == 'POST':
-	# create a form instance and populate it with data from the request:
-		form = log_in_form(request.POST)
-	# check whether it's valid:
+		form = LoginForm(request.POST)
 		if form.is_valid():
-	# process the data in form.cleaned_data as required
-	# ...
-	# redirect to a new URL:
-			return HttpResponseRedirect('/thanks/')
-
-	# if a GET (or any other method) we'll create a blank form
+			user = User.objects.filter(email=form.cleaned_data['email'])
+			if not user:
+				return HttpResponse("User %s not found"%form.cleaned_data['email'])
+			else:
+				user = user.filter(password=form.cleaned_data['password'])
+				if not user:
+					return HttpResponse("Invalid password for user %s!"%form.cleaned_data['email'])
+				else:
+					user = user.get()
+					return HttpResponse("Hello %s!"%user.first_name)
 	else:
-		form = log_in_form()
+        	form = LoginForm();
+	return render(request,'log_in.html', {'form':form})
 
-	return render(request, 'log_in.html', {'form': form})
+def register(request):
+	if request.method == 'POST':
+		form = RegisterForm(request.POST)
+		if form.is_valid():
+			form.save()
+			login_form = LoginForm(request.POST)
+			return render(request,'log_in.html', {'form':login_form})
+	else:
+		form = RegisterForm()
 
-
-
+	return render(request,'register.html', {'form':form})
 def search(request):
 	if 'search_type' in request.GET:
 		search_type = request.GET['search_type']
