@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="/promote/" method="post" />
+	{% csrf_token %}
+	{% if users %}
+	    <select name="to_be_promoted" multiple>
+		{% for user in users %}
+		<option value="{{user.email}}">{{user}}</option> 
+		{% endfor %}
+	    </select>
+	    <br />
+	    <input type="submit" value="Promote Users" />
+	{% else %}
+	    No users to promote
+	{% endif %}
+</form> 
+
+</body>
+</html>

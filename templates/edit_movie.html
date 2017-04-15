@@ -2,12 +2,18 @@
 <html>
 <body>
 
-<form action="/edit_movie/" method="post" />
+<form action="/edit_movie/" method="post">
 	{% csrf_token %}
 	<table>
-	    {{ form.as_table }}
+	    {{ movie_form.as_table }}
 	</table>
-	<input type="submit" value="Submit Movie" />
+	<input type="submit" name="action" value="Submit Movie" />
+	<br />
+	<input type="submit" name="action" value="Add Genre" />
+	{{ genre_form }}
+	<br />
+	<input type="submit" name="action" value="Add Tag" />
+	{{ tag_form }}
 </form> 
 
 </body>

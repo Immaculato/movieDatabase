@@ -21,6 +21,8 @@ urlpatterns = [
 	url(r'^register/$', register),
 	url(r'^homepage/$', home_page),
 	url(r'^login/$', log_in),
+	url(r'^logout/$', log_out),
+	url(r'^promote/$', promote),
 	url(r'^edit_movie/$', edit_movie),
 	url(r'^edit_crew/$', edit_crew),
 	url(r'^search/$', search),
