@@ -19,7 +19,7 @@ from mysite.views import *
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^register/$', register),
-	url(r'^homepage/$', home_page),
+	url(r'^$', home_page),
 	url(r'^login/$', log_in),
 	url(r'^edit_movie/$', edit_movie),
 	url(r'^edit_crew/$', edit_crew),
