@@ -91,3 +91,4 @@ ENV/
 *.swo
 *.swp
 *.orig
+.fuse*

@@ -10,27 +10,38 @@ class Genre(models.Model):
 	def __str__(self):
 		return self.g_name
 
+class Tag(models.Model):
+	t_name = models.CharField(max_length=15, unique=True)
+	
+	def __str__(self):
+		return self.t_name
+
+class Review(models.Model):
+	description = models.CharField(max_length=200)
+	rating = models.IntegerField(validators=[MinValueValidator(0),
+                                       MaxValueValidator(10)])
+	
+	def __str__(self):
+		return self.description
+
 class Movie(models.Model):
-#	m_id = models.AutoField(primary_key=True)
 	title = models.CharField(max_length=30)
 	description = models.CharField(max_length=250)
 	release_date = models.DateField(max_length=30)
 	language = models.CharField(max_length=15)
-#	genre = models.ForeignKey(Genre,  on_delete=models.CASCADE)
 	genre = models.ManyToManyField(Genre)
+	tag = models.ManyToManyField(Tag)
+
+	review = models.ForeignKey(Review, on_delete=models.CASCADE, default=None, blank=True, null=True)
 
 	def __str__(self):
 		return '%s (%s)' % (self.title,self.release_date.year)
 
-class Tag(models.Model):
-	t_name = models.CharField(max_length=15, unique=True)
 
-	def __str__(self):
-		return self.t_name
 
-class Movie_Has_Tag(models.Model):
-	m_id = models.ManyToManyField(Movie)	
-	t_id = models.ManyToManyField(Tag)
+#class Movie_Has_Tag(models.Model):
+#	m_id = models.ManyToManyField(Movie)	
+#	t_id = models.ManyToManyField(Tag)
 
 class Crew(models.Model):
 	crew_first_name = models.CharField(max_length=15)
@@ -56,16 +67,9 @@ class User(models.Model):
 	date_of_birth = models.DateField()
 	manager = models.BooleanField(default=False)
 	sex = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
+	review = models.ForeignKey(Review, on_delete=models.CASCADE, default=None, blank=True, null=True)
 	
 	def __str__(self):
 		return u'%s %s' % (self.first_name, self.last_name)
 
-class Review(models.Model):
-	description = models.CharField(max_length=200)
-	rating = models.IntegerField(validators=[MinValueValidator(0),
-                                       MaxValueValidator(10)])
-	m_id = models.ManyToManyField(Movie)
-	u_id = models.ManyToManyField(User)
-	
-	def __str__(self):
-		return self.description
+
