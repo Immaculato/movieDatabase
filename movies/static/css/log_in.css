@@ -1,9 +1,5 @@
 
 
-.container{
-  padding: 0;
-}
-
 .button{
   float:none;
   margin-top: 20px;
@@ -14,6 +10,7 @@
 .outer {
     display: table;
     position: absolute;
+    margin:0;
     height: 100%;
     width: 100%;
 }
@@ -31,7 +28,7 @@
     border-radius: 2px;
     border-width: 1px;
     padding: 40px 30px 20px 30px;
-    width: 30%/*whatever width you want*/;
+    width: 250px/*whatever width you want*/;
 }
 
 label{
@@ -74,7 +71,7 @@ body{
     border-radius: 2px;
     border-width: 1px;
     padding: 20px 20px 20px 20px;
-    width: 30%/*whatever width you want*/;
+    width: 250px/*whatever width you want*/;
 }
 
 
