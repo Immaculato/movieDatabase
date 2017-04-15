@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse  
 import datetime
-from movies.models import Genre, Movie, Tag, Movie_Has_Tag, Crew, User
-from mysite.forms import LoginForm, RegisterForm, MovieForm, CrewForm
 from movies.models import *
-from mysite.forms import LoginForm, RegisterForm
+from mysite.forms import LoginForm, RegisterForm, MovieForm, CrewForm
 
 def hello(request):
 	return HttpResponse("Hello world")

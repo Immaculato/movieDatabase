@@ -15,8 +15,8 @@ class MovieAdmin(admin.ModelAdmin):
 #	raw_id_fields = ('genre',)
 
 class CrewAdmin(admin.ModelAdmin):
-	list_display = ('c_first_name', 'c_last_name', 'role')
-	search_fields = ('c_first_name', 'c_last_name', 'role',)
+	list_display = ('crew_first_name', 'crew_last_name', 'role')
+	search_fields = ('crew_first_name', 'crew_last_name', 'role',)
 
 class ReviewAdmin(admin.ModelAdmin):
 	list_display = ('description', 'rating')

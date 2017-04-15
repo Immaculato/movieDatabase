@@ -23,7 +23,7 @@
             <p>Found {{ crews|length }} crew{{ crews|pluralize }}.</p>
             <ul>               
                 {% for crew in crews %}
-                <li><a class="btn-link" href="/movie/?id={{ crew.id }}"> {{crew.c_first_name}} </a></li>                
+                <li><a class="btn-link" href="/movie/?id={{ crew.id }}"> {{crew.crew_first_name}} </a></li>                
                 {% endfor %}
             </ul>       
         {% elif tags %}
