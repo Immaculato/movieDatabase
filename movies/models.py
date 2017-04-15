@@ -22,7 +22,7 @@ class Movie(models.Model):
 	release_date = models.DateField(max_length=30)
 	language = models.CharField(max_length=15)
 	genre = models.ManyToManyField(Genre)
-	tag = models.ManyToManyField(Tag)
+	tag = models.ManyToManyField(Tag,blank=True)
 
 
 #	review = models.ForeignKey(Review, on_delete=models.CASCADE, default=None, blank=True, null=True)
@@ -47,7 +47,7 @@ class User(models.Model):
 
 	
 	def __str__(self):
-		return u'%s %s' % (self.first_name, self.last_name)
+		return u'%s %s (%s)' % (self.first_name, self.last_name, self.email)
 
 
 class Review(models.Model):

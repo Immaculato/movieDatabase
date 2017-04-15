@@ -1,10 +1,10 @@
 from django import forms
 from django.forms import ModelForm
-from movies.models import User, Movie, Crew
+from movies.models import User, Movie, Crew, Genre,Tag
 
 class LoginForm(forms.Form):
-	email = forms.EmailField(label='Email', max_length=30)
-	password = forms.CharField(label='Password', max_length=20)
+	email = forms.EmailField(label='EMAIL', max_length=30)
+	password = forms.CharField(label='PASSWORD', max_length=20)
 
 class RegisterForm(ModelForm):
     class Meta:
@@ -14,13 +14,25 @@ class RegisterForm(ModelForm):
 class MovieForm(ModelForm):
     class Meta:
         model = Movie
-        fields = ['title','description','release_date','language','genre']
+        fields = ['title','description','release_date','language','genre','tag']
 
 class CrewForm(ModelForm):
 	class Meta:
 		model = Crew
 		labels = {'m_id': 'Movies'}
 		fields = ['crew_first_name','crew_last_name','role','m_id']
+
+class GenreForm(ModelForm):
+	class Meta:
+		model = Genre
+		labels = {'g_name': ''}
+		fields = ['g_name']
+
+class TagForm(ModelForm):
+	class Meta:
+		model = Tag
+		labels = {'t_name': ''}
+		fields = ['t_name']
 
 #class RegisterForm(forms.Form):
 #	GENDER_CHOICES = (
