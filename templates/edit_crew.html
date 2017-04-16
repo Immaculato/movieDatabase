@@ -3,13 +3,16 @@
 <body>
 
 
-<form action="/edit_crew/" method="post" />
+{% if crew_id %}
+<form action="/edit_crew/update_id={{ crew_id }}" method="post">
+{% else %}
+<form action="/edit_crew/" method="post">
+{% endif %}
 	{% csrf_token %}
 	<table>
 	    {{ crew_form.as_table }}
-	    <!{{ movie_form.as_table }}>
 	</table>
-	<input type="submit" value="Submit Crew Member" />
+	<input type="submit" name="action" value="Submit Crew Member" />
 </form> 
 
 

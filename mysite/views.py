@@ -72,20 +72,40 @@ def is_manager(request):
 def must_be_manager_response():
 	return HttpResponse('Must be logged in as a manager to complete this function')
 
-def edit_crew(request):
+def edit_crew(request,crew_id=None):
 	if is_manager(request):
-		if request.method == 'POST':
-			crew_form = CrewForm(request.POST);
+		if crew_id:
+			crew_instance = Crew.objects.get(id=crew_id)
+		else:
+			crew_instance = None
+		if request.method == 'POST' and request.POST.get('action','') == 'Submit Crew Member':
+			crew_form = CrewForm(request.POST,instance=crew_instance);
 			if crew_form.is_valid():
 				crew_form.save()
 			else:
 				return HttpResponse('Invalid form input')
 		else:
-			crew_form = CrewForm();
+			crew_form = CrewForm(instance=crew_instance)
 
-		return render(request,'edit_crew.html',{'crew_form':crew_form})
+		return render(request,'edit_crew.html',{'crew_form':crew_form,'crew_id':crew_id})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit crew')
+
+def modify_crew(request):
+	if is_manager(request):
+		if request.method == "POST":
+			if 'crew_id' in request.POST:
+				crew_id = request.POST['crew_id']
+				if request.POST['operation'] == 'Modify':
+					return edit_crew(request,crew_id);
+				elif request.POST['operation'] == 'Remove':
+					Crew.objects.filter(id=crew_id).delete()
+					
+		crew_members = Crew.objects.all()
+		return render(request, 'modify_crew.html',{'crew_members':crew_members})
+	else:
+		return HttpResponse('Must be logged in as a manager to edit crew')
+
 
 def disable_empty_checks(form):
 	for field in form.fields:
@@ -242,7 +262,7 @@ def modify_movie(request):
 		movies = Movie.objects.all()
 		return render(request, 'modify_movie.html',{'movies':movies})
 	else:
-		return HttpResponse('Must be logged in as a manager to edit crew')
+		return HttpResponse('Must be logged in as a manager to edit movies')
 
 def movies_by_genres(request):
 	if 'g_id' in request.GET:

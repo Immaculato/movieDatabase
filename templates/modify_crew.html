@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="/modify_crew/" method="post" />
+	{% csrf_token %}
+	{% if crew_members %}
+	    <select name="crew_id">
+		{% for crew in crew_members %}
+		<option value="{{crew.id}}">{{crew}}</option> 
+		{% endfor %}
+	    </select>
+	    <br />
+	    <input type="submit" name="operation" value="Remove" />
+	    <input type="submit" name="operation" value="Modify" />
+	{% else %}
+	    No crew to modify
+	{% endif %}
+</form> 
+
+</body>
+</html>

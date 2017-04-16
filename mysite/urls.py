@@ -26,6 +26,8 @@ urlpatterns = [
 	url(r'^edit_movie/update_id=(\d+)$', edit_movie),
 	url(r'^edit_movie/$', edit_movie),
 	url(r'^modify_movie/$', modify_movie),
+	url(r'^modify_crew/$', modify_crew),
+	url(r'^edit_crew/update_id=(\d+)$', edit_crew),
 	url(r'^edit_crew/$', edit_crew),
 	url(r'^search/$', search),
         url(r'^movie/$', movie),
