@@ -92,3 +92,8 @@ ENV/
 *.swp
 *.orig
 .fuse*
+
+# ignore sqllite database. to generate, do 
+# `python manage.py makemigrations movies`, then 
+# `python manage.py migrate` 
+*.sqlite3

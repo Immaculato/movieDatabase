@@ -224,12 +224,13 @@ def movie(request):
 		genre = Genre.objects.filter(movie__id=ID)
 		tags = Tag.objects.filter(movie__id=ID)
 		crew = Crew.objects.filter(m_id=ID)
-		print(crew)
 		review = Review.objects.filter(movie__id=ID)
+
+		
 		return render(request, 'movie_info.html',
                              {'movie': results, 'genre': genre,
 			      'tags': tags, 'crew': crew, 'ID': ID,
-			      'reviews': review})
+			      'reviews': review, 'is_manager': is_manager(request)})
 
 def promote(request):
 	if is_manager(request):
