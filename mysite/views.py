@@ -93,41 +93,54 @@ def force_empty_checks(form,except_for=[]):
 		if field not in except_for:
 			form.fields[field].required = True
 
-def edit_movie(request):
+def edit_movie(request,movie_id=None):
 	if is_manager(request):
 		if request.method == 'POST':
-			movie_form = MovieForm(request.POST)
-			if request.POST['action'] == 'Submit Movie':
-				genre_form = GenreForm()
-				disable_empty_checks(genre_form)
-				tag_form = TagForm()
-				disable_empty_checks(tag_form)
-				force_empty_checks(movie_form,'tag')
-				if movie_form.is_valid():
-					new_movie = movie_form.save()
-					return redirect('/movie/?id=%s'%new_movie.id, request)
-
-			elif request.POST['action'] == 'Add Tag': 
-				disable_empty_checks(movie_form)
-				genre_form = GenreForm(request.POST)
-				disable_empty_checks(genre_form)
-				tag_form = TagForm(request.POST)
-				force_empty_checks(tag_form)
-				if tag_form.is_valid():
-					tag_form.save()
-					tag_form=TagForm()
-					disable_empty_checks(tag_form)
-
-			elif request.POST['action'] == 'Add Genre': 
-				disable_empty_checks(movie_form)
-				tag_form  = GenreForm(request.POST)
-				disable_empty_checks(tag_form)
-				genre_form = GenreForm(request.POST)
-				force_empty_checks(genre_form)
-				if genre_form.is_valid():
-					genre_form.save()
-					genre_form=GenreForm()
+			if movie_id:
+				movie_instance = Movie.objects.get(id=movie_id)
+			else:
+				movie_instance = None
+				
+			if 'action' in request.POST:
+				movie_form = MovieForm(request.POST,instance=movie_instance)
+				if request.POST['action'] == 'Submit Movie':
+					genre_form = GenreForm()
 					disable_empty_checks(genre_form)
+					tag_form = TagForm()
+					disable_empty_checks(tag_form)
+					force_empty_checks(movie_form,'tag')
+					if movie_form.is_valid():
+						new_movie = movie_form.save()
+						return redirect('/movie/?id=%s'%new_movie.id, request)
+
+				elif request.POST['action'] == 'Add Tag': 
+					disable_empty_checks(movie_form)
+					genre_form = GenreForm(request.POST)
+					disable_empty_checks(genre_form)
+					tag_form = TagForm(request.POST)
+					force_empty_checks(tag_form)
+					if tag_form.is_valid():
+						tag_form.save()
+						tag_form=TagForm()
+						disable_empty_checks(tag_form)
+
+				elif request.POST['action'] == 'Add Genre': 
+					disable_empty_checks(movie_form)
+					tag_form  = GenreForm(request.POST)
+					disable_empty_checks(tag_form)
+					genre_form = GenreForm(request.POST)
+					force_empty_checks(genre_form)
+					if genre_form.is_valid():
+						genre_form.save()
+						genre_form=GenreForm()
+						disable_empty_checks(genre_form)
+			else:
+				movie_form = MovieForm(instance=movie_instance)
+				genre_form = GenreForm()
+				tag_form   = TagForm()
+				disable_empty_checks(genre_form)
+				disable_empty_checks(tag_form  )
+
 		else:
 			genre_form = GenreForm()
 			movie_form = MovieForm()
@@ -136,7 +149,10 @@ def edit_movie(request):
 			disable_empty_checks(genre_form)
 			disable_empty_checks(tag_form  )
 
-		return render(request,'edit_movie.html',{'movie_form':movie_form,'genre_form':genre_form,'tag_form':tag_form})
+		options = {'movie_form':movie_form,'genre_form':genre_form,'tag_form':tag_form}
+		if movie_id:
+			options['movie_id'] = movie_id
+		return render(request,'edit_movie.html',options)
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
 
@@ -207,6 +223,21 @@ def promote(request):
 		else:
 			normal_users = User.objects.filter(manager=False)
 			return render(request, 'promote.html',{'users':normal_users})
+	else:
+		return HttpResponse('Must be logged in as a manager to edit crew')
+
+def modify_movie(request):
+	if is_manager(request):
+		if request.method == "POST":
+			if 'movie_id' in request.POST:
+				movie_id = request.POST['movie_id']
+				if request.POST['operation'] == 'Modify':
+					return edit_movie(request,movie_id);
+				elif request.POST['operation'] == 'Remove':
+					Movie.objects.filter(id=movie_id).delete()
+					
+		movies = Movie.objects.all()
+		return render(request, 'modify_movie.html',{'movies':movies})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit crew')
 

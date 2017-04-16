@@ -2,7 +2,11 @@
 <html>
 <body>
 
+{% if movie_id %}
+<form action="/edit_movie/update_id={{ movie_id }}" method="post">
+{% else %}
 <form action="/edit_movie/" method="post">
+{% endif %}
 	{% csrf_token %}
 	<table>
 	    {{ movie_form.as_table }}
