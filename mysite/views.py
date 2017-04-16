@@ -4,11 +4,7 @@ import datetime
 from movies.models import *
 from mysite.forms import *
 
-def hello(request):
-	return HttpResponse("Hello world")
 
-def homepage(request):
-	return HttpResponse("CS405 Homepage")
 
 def home_page(request):
 	return render(request, 'home_page.html')
@@ -42,7 +38,8 @@ def log_in(request):
 						    request.session.modified = True
 						# Cookies will expire when browser closes
 						request.session.set_expiry(0)
-						return HttpResponse(response_string)
+						return home_page(request)
+#						return HttpResponse(response_string)
 		else:
         		form = LoginForm();
 		return render(request,'log_in.html', {'form':form})
