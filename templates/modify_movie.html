@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="/modify_movie/" method="post" />
+	{% csrf_token %}
+	{% if movies %}
+	    <select name="movie_id">
+		{% for movie in movies %}
+		<option value="{{movie.id}}">{{movie}}</option> 
+		{% endfor %}
+	    </select>
+	    <br />
+	    <input type="submit" name="operation" value="Remove" />
+	    <input type="submit" name="operation" value="Modify" />
+	{% else %}
+	    No movies to modify
+	{% endif %}
+</form> 
+
+</body>
+</html>
