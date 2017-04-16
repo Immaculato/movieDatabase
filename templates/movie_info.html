@@ -3,13 +3,29 @@
 <title>Movie Information</title>
 </head>
 <body>
-    <p>You searched for: {{movie.title}} </p>
-    <h2>{{movie.title}} ({{movie.release_date}})</h2>
-    <h3> GENRE: {% for g in genre %}
-                    {{g.g_name}} 
-                {% endfor %}, 
-                LANGUAGE: {{movie.language}}</h3>
-    <p>{{movie.description}}</p>
+    <h2>TITLE: {{movie.title}} ({{movie.release_date}})</h2>
+    <h3> GENRES: {% for g in genre %}
+                    {{g.g_name}},  
+                {% endfor %} 
+	<br>
+	TAGS: {% for t in tags %}
+			{{ t.t_name }}, 
+		{% endfor%} 
+	<br>
+	CREW: {% for c in crew %}
+			{{ c.crew_first_name }} {{ c.crew_last_name}} - {{ c.role }}, 
+		{% endfor %}
+	<br> 
+	LANGUAGE: {{movie.language}}
+	<br>
+	REVIEW: {% for r in reviews %}
+			Comment: {{ r.description }}
+			<br>
+			Rating: {{ r.rating }}
+			<br>
+		{% endfor %}
+	</h3>
+    <p>DESCRIPTION: {{movie.description}}</p>
 
 </body>
 </html>

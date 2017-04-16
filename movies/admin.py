@@ -11,7 +11,7 @@ class MovieAdmin(admin.ModelAdmin):
 	list_filter = ('release_date',)
 	ordering = ('title', 'release_date', 'language', 'genre',)
 	search_fields = ('title', )
-	filter_horizontal = ('genre', )
+	filter_horizontal = ('genre', 'tag', )
 #	raw_id_fields = ('genre',)
 
 class CrewAdmin(admin.ModelAdmin):
@@ -21,6 +21,7 @@ class CrewAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
 	list_display = ('description', 'rating')
 	search_fields = ('description',)
+	
 
 class UserAdmin(admin.ModelAdmin):
 	list_display = ('first_name', 'middle_name', 'last_name', 'email', 'manager')
@@ -38,4 +39,4 @@ admin.site.register(Movie, MovieAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Crew, CrewAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.register(Review, ReviewAdmin)
+admin.site.register(Review)

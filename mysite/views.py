@@ -161,30 +161,35 @@ def edit_movie(request,movie_id=None):
 
 def search(request):
 	errors = []
+	g_ids = []
 	if 'Search' in request.GET:
 
 		movies = Movie.objects.all()
 		if 'g_id' in request.GET:
 			g_ids = request.GET.getlist('g_id')
-			movies = movies.filter(genre__id__in=g_ids)
-			#genres = Genre.objects.filter(id__in=g_ids)	
+			if g_ids:
+				movies = movies.filter(genre__id__in=g_ids)
 		if 'tag_q' in request.GET:
 			tag_q = request.GET['tag_q']
-			movies = movies.filter(tag__t_name__icontains=tag_q)
-			#tag = Tag.objects.filter(t_name__icontains=tag_q)	
+			if tag_q:
+				movies = movies.filter(tag__t_name__icontains=tag_q)
 		if 'crew_q' in request.GET:
 			crew_q = request.GET['crew_q']
-			movies = movies.filter(crew__crew_first_name__icontains=crew_q)
-			#crew_first_name = Crew.objects.filter(crew_first_name__icontains=crew_q)
+			if crew_q:
+				movies = movies.filter(crew__crew_first_name__icontains=crew_q)
+		if 'crew_q2' in request.GET:
+			crew_q2 = request.GET['crew_q2']
+			if crew_q2:
+				movies = movies.filter(crew__crew_last_name__icontains=crew_q2)
 		if 'title_q' in request.GET:
 			title_q = request.GET['title_q']
-			movies = movies.filter(title__icontains=title_q)
-			#m_title = Movie.objects.filter(title__icontains=title_q)
+			if title_q:
+				movies = movies.filter(title__icontains=title_q)
 		return render(request, 'search_results.html', {'genre': Genre.objects.filter(id__in=g_ids), 
 								'tag': tag_q,
 								'crew': crew_q,
 								'title': title_q,
-								'movies': movies, })
+								'movies': movies.distinct, })
 
 	else:
 
@@ -199,8 +204,14 @@ def movie(request):
 		ID = request.GET['id']
 		results = Movie.objects.get(pk = ID)
 		genre = Genre.objects.filter(movie__id=ID)
+		tags = Tag.objects.filter(movie__id=ID)
+		crew = Crew.objects.filter(m_id=ID)
+		print(crew)
+		review = Review.objects.filter(movie__id=ID)
 		return render(request, 'movie_info.html',
-                             {'movie': results, 'genre': genre, 'ID': ID})
+                             {'movie': results, 'genre': genre,
+			      'tags': tags, 'crew': crew, 'ID': ID,
+			      'reviews': review})
 
 def promote(request):
 	if is_manager(request):
