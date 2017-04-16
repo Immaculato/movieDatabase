@@ -10,20 +10,26 @@ def home_page(request):
 	return render(request, 'home_page.html')
 
 def log_in(request):
+	errors = []
 	if 'email' in request.session:
-		log_out_link = '<br /><a href="/logout/">Click here to log out.</a>'
-		return HttpResponse("Already logged in with email %s%s"%(request.session['email'],log_out_link))
+#		log_out_link = '<br /><a href="/logout/">Click here to log out.</a>'
+	#	return HttpResponse("Already logged in with email %s%s"%(request.session['email'],log_out_link))
+		return log_out(request)
 	else:
 		if request.method == 'POST':
 			form = LoginForm(request.POST)
 			if form.is_valid():
 				user = User.objects.filter(email=form.cleaned_data['email'])
 				if not user:
-					return HttpResponse("User %s not found"%form.cleaned_data['email'])
+					errors.append('User not found.')
+					return render(request, 'log_in.html', {'errors': errors})
+					#return HttpResponse("User %s not found"%form.cleaned_data['email'])
 				else:
 					user = user.filter(password=form.cleaned_data['password'])
 					if not user:
-						return HttpResponse("Invalid password for user %s!"%form.cleaned_data['email'])
+#						return HttpResponse("Invalid password for user %s!"%form.cleaned_data['email'])
+						errors.append('password is incorrect')
+						return render(request, 'log_in.html', {'errors': errors})
 					else:
 						user = user.get()
 						request.session['email'] = user.email

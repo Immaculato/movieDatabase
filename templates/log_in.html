@@ -11,6 +11,15 @@
     		<div class="outer">
  			 <div class="middle">
     			<div class="inner">
+					    {% if errors %}
+
+						{% for error in errors %}
+						<li><p style="color: red;">
+							{{ error }}
+						</p></li>
+						{% endfor %}
+
+					    {% endif %}
 					<form action="/login/" method="post" />
 					{% csrf_token %}
 
@@ -30,7 +39,7 @@
     		<div class="outer1">
  			 <div class="middle1">
     			<div class="inner1">
-    				<p> Don't have an account? <a href="/register">Register Now</a></p>
+    				<p> Don't have an account? <br> <a href="/register">Register Now</a></p>
     					</div>
     				</div>
     			</div>
