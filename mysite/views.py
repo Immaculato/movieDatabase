@@ -12,8 +12,6 @@ def home_page(request):
 def log_in(request):
 	errors = []
 	if 'email' in request.session:
-#		log_out_link = '<br /><a href="/logout/">Click here to log out.</a>'
-	#	return HttpResponse("Already logged in with email %s%s"%(request.session['email'],log_out_link))
 		return log_out(request)
 	else:
 		if request.method == 'POST':
@@ -23,11 +21,9 @@ def log_in(request):
 				if not user:
 					errors.append('User not found.')
 					return render(request, 'log_in.html', {'errors': errors})
-					#return HttpResponse("User %s not found"%form.cleaned_data['email'])
 				else:
 					user = user.filter(password=form.cleaned_data['password'])
 					if not user:
-#						return HttpResponse("Invalid password for user %s!"%form.cleaned_data['email'])
 						errors.append('password is incorrect')
 						return render(request, 'log_in.html', {'errors': errors})
 					else:
@@ -45,7 +41,6 @@ def log_in(request):
 						# Cookies will expire when browser closes
 						request.session.set_expiry(0)
 						return home_page(request)
-#						return HttpResponse(response_string)
 		else:
         		form = LoginForm();
 		return render(request,'log_in.html', {'form':form})
