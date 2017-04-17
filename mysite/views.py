@@ -10,13 +10,78 @@ def must_be_manager_response():
 	return HttpResponse('Must be logged in as a manager to complete this function')
 
 
-def home_page(request):
+def edit_movie(request,movie_id=None):
+	if is_manager(request):
+		if request.method == 'POST':
+			if movie_id:
+				movie_instance = Movie.objects.get(id=movie_id)
+			else:
+				movie_instance = None
+				
+			if 'action' in request.POST:
+				movie_form = MovieForm(request.POST,instance=movie_instance)
+				if request.POST['action'] == 'Submit Movie':
+					genre_form = GenreForm()
+					disable_empty_checks(genre_form)
+					tag_form = TagForm()
+					disable_empty_checks(tag_form)
+					force_empty_checks(movie_form,'tag')
+					if movie_form.is_valid():
+						new_movie = movie_form.save()
+						return redirect('/movie/?id=%s'%new_movie.id, request)
 
+				elif request.POST['action'] == 'Add Tag': 
+					disable_empty_checks(movie_form)
+					genre_form = GenreForm(request.POST)
+					disable_empty_checks(genre_form)
+					tag_form = TagForm(request.POST)
+					force_empty_checks(tag_form)
+					if tag_form.is_valid():
+						tag_form.save()
+						tag_form=TagForm()
+						disable_empty_checks(tag_form)
+
+				elif request.POST['action'] == 'Add Genre': 
+					disable_empty_checks(movie_form)
+					tag_form  = GenreForm(request.POST)
+					disable_empty_checks(tag_form)
+					genre_form = GenreForm(request.POST)
+					force_empty_checks(genre_form)
+					if genre_form.is_valid():
+						genre_form.save()
+						genre_form=GenreForm()
+						disable_empty_checks(genre_form)
+			else:
+				movie_form = MovieForm(instance=movie_instance)
+				genre_form = GenreForm()
+				tag_form   = TagForm()
+				disable_empty_checks(genre_form)
+				disable_empty_checks(tag_form  )
+
+		else:
+			genre_form = GenreForm()
+			movie_form = MovieForm()
+			tag_form   = TagForm()
+			disable_empty_checks(movie_form)
+			disable_empty_checks(genre_form)
+			disable_empty_checks(tag_form  )
+
+		options = {'movie_form':movie_form,'genre_form':genre_form,'tag_form':tag_form}
+		if movie_id:
+			options['movie_id'] = movie_id
+		return render(request,'edit_movie.html',options, {'is_manager': is_manager(request)})
+	else:
+		return HttpResponse('Must be logged in as a manager to edit movies')
+
+def home_page(request):
 	return render(request, 'home_page.html', { 'is_manager': is_manager(request)})
 	
+def contributions(request):
+	return render(request, 'contributions.html', { 'is_manager': is_manager(request)})
+
 def manager_page(request):
 	if is_manager(request):
-		return render(request, 'manager_page.html')
+		return render(request, 'manager_page.html',{ 'is_manager': is_manager(request)})
 	else:
 		return HttpResponse('Must be logged in as a manager to access this page.')
 
@@ -51,6 +116,7 @@ def log_in(request):
 						    request.session.modified = True
 						# Cookies will expire when browser closes
 						request.session.set_expiry(0)
+#						return render(request, home_page(request), {'is_manager': is_manager(request)})
 						return home_page(request)
 		else:
         		form = LoginForm();
@@ -122,68 +188,6 @@ def force_empty_checks(form,except_for=[]):
 		if field not in except_for:
 			form.fields[field].required = True
 
-def edit_movie(request,movie_id=None):
-	if is_manager(request):
-		if request.method == 'POST':
-			if movie_id:
-				movie_instance = Movie.objects.get(id=movie_id)
-			else:
-				movie_instance = None
-				
-			if 'action' in request.POST:
-				movie_form = MovieForm(request.POST,instance=movie_instance)
-				if request.POST['action'] == 'Submit Movie':
-					genre_form = GenreForm()
-					disable_empty_checks(genre_form)
-					tag_form = TagForm()
-					disable_empty_checks(tag_form)
-					force_empty_checks(movie_form,'tag')
-					if movie_form.is_valid():
-						new_movie = movie_form.save()
-						return redirect('/movie/?id=%s'%new_movie.id, request)
-
-				elif request.POST['action'] == 'Add Tag': 
-					disable_empty_checks(movie_form)
-					genre_form = GenreForm(request.POST)
-					disable_empty_checks(genre_form)
-					tag_form = TagForm(request.POST)
-					force_empty_checks(tag_form)
-					if tag_form.is_valid():
-						tag_form.save()
-						tag_form=TagForm()
-						disable_empty_checks(tag_form)
-
-				elif request.POST['action'] == 'Add Genre': 
-					disable_empty_checks(movie_form)
-					tag_form  = GenreForm(request.POST)
-					disable_empty_checks(tag_form)
-					genre_form = GenreForm(request.POST)
-					force_empty_checks(genre_form)
-					if genre_form.is_valid():
-						genre_form.save()
-						genre_form=GenreForm()
-						disable_empty_checks(genre_form)
-			else:
-				movie_form = MovieForm(instance=movie_instance)
-				genre_form = GenreForm()
-				tag_form   = TagForm()
-				disable_empty_checks(genre_form)
-				disable_empty_checks(tag_form  )
-
-		else:
-			genre_form = GenreForm()
-			movie_form = MovieForm()
-			tag_form   = TagForm()
-			disable_empty_checks(movie_form)
-			disable_empty_checks(genre_form)
-			disable_empty_checks(tag_form  )
-
-		options = {'movie_form':movie_form,'genre_form':genre_form,'tag_form':tag_form}
-		if movie_id:
-			options['movie_id'] = movie_id
-		return render(request,'edit_movie.html',options)
-	else:
-		return HttpResponse('Must be logged in as a manager to edit movies')
 
 def search(request):
 	errors = []
@@ -215,13 +219,17 @@ def search(request):
 								'tag': tag_q,
 								'crew': crew_q,
 								'title': title_q,
-								'movies': movies.distinct})
+								'movies': movies.distinct,
+								'is_manager': is_manager(request)})
 
 	else:
 
 		genres = Genre.objects.all()	
 		return render(request, 'search_form.html', {'errors': errors,
-							    'genres': genres,})
+							    'genres': genres,
+							    'is_manager': is_manager(request)})
+
+							
 
 
 
@@ -239,7 +247,7 @@ def movie(request):
 		return render(request, 'movie_info.html',
                              {'movie': results, 'genre': genre,
 			      'tags': tags, 'crew': crew, 'ID': ID,
-			      'reviews': review})
+			      'reviews': review, 'is_manager': is_manager(request)})
 
 def promote(request):
 	if is_manager(request):
@@ -255,7 +263,7 @@ def promote(request):
 			normal_users = User.objects.filter(manager=False)
 			return render(request, 'promote.html',{'users':normal_users})
 	else:
-		return HttpResponse('Must be logged in as a manager to edit crew')
+		return HttpResponse('Must be logged in as a manager to promote')
 
 def modify_movie(request):
 	if is_manager(request):
@@ -271,4 +279,5 @@ def modify_movie(request):
 		return render(request, 'modify_movie.html',{'movies':movies})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
+
 

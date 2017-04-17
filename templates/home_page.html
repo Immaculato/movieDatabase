@@ -1,3 +1,4 @@
+
 {% load staticfiles %}
   <html>
         <head>
@@ -16,9 +17,10 @@
                         </div>
                         <ul class="nav navbar-nav">
                           <li><a href="/">Home</a></li>
-                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                          <li class="nav navbar-nav"><a href="/contributions">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+
 
                             {% if is_manager %}
                                 <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
@@ -43,6 +45,7 @@
                     <div class="col-sm-8 col-sm-offset-2" >
                         <h2>About</h2>   
                          <p>This website implements a django powered movie database. Registering for this website allows you to:
+
                          <ul>
                             <li>Search for movies based on <em>genre</em>, <em>title</em>, <em>movie crew</em> </li>
                             <li>Add tags to movies</li>
@@ -53,14 +56,6 @@
                          </p>
                     </div>
                 </div>
-                </div>
-                <div id="contribute" class="creat-container">
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2" >
-                    
-                         <p></p>
-                         </div>
-                    </div>
                 </div>
  
          </body>
