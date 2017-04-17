@@ -4,6 +4,7 @@ import datetime
 from movies.models import *
 from mysite.forms import *
 
+
 def is_manager(request):
 	return 'manager' in request.session
 def must_be_manager_response():
@@ -105,6 +106,7 @@ def log_in(request):
 					else:
 						user = user.get()
 						request.session['email'] = user.email
+						request.session['userID'] = user.id
 						response_string = "Hello %s!"%user.first_name
 						if user.manager:
 						    request.session['manager'] = True
@@ -237,17 +239,39 @@ def movie(request):
 
 	if 'id' in request.GET:
 		ID = request.GET['id']
-		results = Movie.objects.get(pk = ID)
+		results = Movie.objects.get(pk=ID)
 		genre = Genre.objects.filter(movie__id=ID)
 		tags = Tag.objects.filter(movie__id=ID)
 		crew = Crew.objects.filter(m_id=ID)
 		review = Review.objects.filter(movie__id=ID)
+		
+		user_id = request.session['userID']
+		review_form = ReviewForm(initial={'movie': ID, 'user': user_id})
 
 		
 		return render(request, 'movie_info.html',
                              {'movie': results, 'genre': genre,
 			      'tags': tags, 'crew': crew, 'ID': ID,
-			      'reviews': review, 'is_manager': is_manager(request)})
+			      'reviews': review, 'is_manager': is_manager(request), 'review_form': review_form})
+
+def add_review(request):
+
+	if request.method == "POST":
+		review_instance = None
+		review_form = ReviewForm(request.POST, instance=review_instance)
+
+		if review_form.is_valid():
+			"""
+			imm = review_form.cleaned_data['movie']
+			print("INTER: ", imm)
+			ID = Movie.objects.filter(title=imm)
+			print("ID: ", ID)
+			"""
+			review_form.save()
+		else:
+			return HttpResponse('Invalid form input')
+	'''return redirect('/search/', request)'''
+	return HttpResponse("Thanks for the commnent. Go back and refresh to see your comment!")
 
 def promote(request):
 	if is_manager(request):

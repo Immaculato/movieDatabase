@@ -18,15 +18,15 @@
                         <ul class="nav navbar-nav navbar-right">
                             <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
                             {% if is_manager %}
-                                <li ><a href="/modify_movie/update_id={{ movie.id }}"><span class="glyphicon glyphicon-pencil"></span> Edit Movie </a></li>
-                                <li ><a href="/modify_crew"><span class="glyphicon glyphicon-pencil"></span> Edit Crew </a></li>
+                                <li ><a href="/modify_movie" target="_blank"><span class="glyphicon glyphicon-pencil"></span> Edit Movies </a></li>
+                                <li ><a href="/modify_crew" target="_blank"><span class="glyphicon glyphicon-pencil"></span> Edit Crews </a></li>
                             {% endif %}}
                             <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
                             <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
                         </ul>
                       </div>
                 </nav>
-    <h2>TITLE: {{movie.title}} ({{movie.release_date}})</h2>
+    <h2>{{movie.title}} ({{movie.release_date}})</h2>
     <h3> GENRES: {% for g in genre %}
                     {{g.g_name}},  
                 {% endfor %} 
@@ -40,15 +40,29 @@
 		{% endfor %}
 	<br> 
 	LANGUAGE: {{movie.language}}
+	<p>DESCRIPTION: {{movie.description}}</p>
 	<br>
 	REVIEW: {% for r in reviews %}
-			Comment: {{ r.description }}
+			User: {{ r.user}}
 			<br>
 			Rating: {{ r.rating }}
 			<br>
+			Comment: {{ r.description }}
+			<br>
+			<br>
 		{% endfor %}
 	</h3>
-    <p>DESCRIPTION: {{movie.description}}</p>
+					
+	<form action="/add_review/" method="post" />
+		{% csrf_token %}
+
+    <p>Leave A Review: {{ review_form.movie.as_hidden }}
+    {{ review_form.user.as_hidden }}
+     {{ review_form.description }}
+     {{ review_form.rating }} </p>
+     
+     <input type="submit" class="btn btn-block button" value="Leave Review" />
+    </form>
 
 </body>
 </html>
