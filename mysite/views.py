@@ -4,10 +4,18 @@ import datetime
 from movies.models import *
 from mysite.forms import *
 
+def is_manager(request):
+	return 'manager' in request.session
+def must_be_manager_response():
+	return HttpResponse('Must be logged in as a manager to complete this function')
 
 
 def home_page(request):
-	return render(request, 'home_page.html')
+	return render(request, 'home_page.html', {'is_manager': is_manager(request)})
+	
+def manager_page(request):
+	if is_manager(request):
+		return render(request, 'manager_page.html')
 
 def log_in(request):
 	errors = []
@@ -65,10 +73,6 @@ def register(request):
 
 	return render(request,'register.html', {'form':form})
 
-def is_manager(request):
-	return 'manager' in request.session
-def must_be_manager_response():
-	return HttpResponse('Must be logged in as a manager to complete this function')
 
 def edit_crew(request,crew_id=None):
 	if is_manager(request):
