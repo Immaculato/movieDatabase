@@ -1,10 +1,12 @@
+{% load staticfiles %}
+
 <html>
 <head>
 <title>Movie Information</title>
             <!-- LINK TO BOOTSTRAP STUFF -->
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-            
+ 	<link rel="stylesheet" href="{% static 'css/movie_info.css' %}">           
         </head>
          <body>
                <nav class="navbar navbar-default navbar-static-top">
@@ -20,48 +22,58 @@
                             {% if is_manager %}
                                 <li ><a href="/modify_movie" target="_blank"><span class="glyphicon glyphicon-pencil"></span> Edit Movies </a></li>
                                 <li ><a href="/modify_crew" target="_blank"><span class="glyphicon glyphicon-pencil"></span> Edit Crews </a></li>
-                            {% endif %}}
+                            {% endif %}
                             <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
                             <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
                         </ul>
                       </div>
                 </nav>
-    <h2>{{movie.title}} ({{movie.release_date}})</h2>
-    <h3> GENRES: {% for g in genre %}
-                    {{g.g_name}},  
-                {% endfor %} 
-	<br>
-	TAGS: {% for t in tags %}
+
+    <div class="jumbotron"><h1 class="display-3"> {{movie.title}}</h1> 
+	<p> ({{movie.release_date}})</p>
+	<hr class="my-4">
+	<p class = "lead">{{movie.description}}</p>
+	</div>
+	
+	<ul class="list-group">
+	   	<li class="list-group-item">GENRES: {% for g in genre %}
+        	        {{g.g_name}},  
+                	{% endfor %} ...
+		</li>
+		<li class="list-group-item">TAGS: {% for t in tags %}
 			{{ t.t_name }}, 
-		{% endfor%} 
-	<br>
-	CREW: {% for c in crew %}
+			{% endfor%} ...
+		</li>
+		<li class="list-group-item">CREW: {% for c in crew %}
 			{{ c.crew_first_name }} {{ c.crew_last_name}} - {{ c.role }}, 
-		{% endfor %}
-	<br> 
-	LANGUAGE: {{movie.language}}
-	<p>DESCRIPTION: {{movie.description}}</p>
+			{% endfor %} ...
+		</li> 
+		<li class="list-group-item">LANGUAGE: {{movie.language}}</li>
+		<li class="list-group-item">DESCRIPTION: {{movie.description}}</li>
+	</ul>
 	<br>
-	REVIEW: {% for r in reviews %}
-			User: {{ r.user}}
-			<br>
-			Rating: {{ r.rating }}
-			<br>
-			Comment: {{ r.description }}
-			<br>
-			<br>
+	<div class="reviews">
+	<h3>REVIEWS</h3>
+		 {% for r in reviews %}
+			<div class="review-item">
+				<p>Rating: <em>{{ r.rating }}</em></p>
+				<p>User: {{ r.user}}</p>
+				<blockquote>
+				<p>{{ r.description }}<p>
+				</blockquote>
+			</div>
 		{% endfor %}
-	</h3>
+	</div>
 					
 	<form action="/add_review/" method="post" />
 		{% csrf_token %}
-
-    <p>Leave A Review: {{ review_form.movie.as_hidden }}
-    {{ review_form.user.as_hidden }}
-     {{ review_form.description }}
-     {{ review_form.rating }} </p>
-     
-     <input type="submit" class="btn btn-block button" value="Leave Review" />
+	<hr class="my-4">
+    	<h3>Add Review:</h3> 
+	{{ review_form.movie.as_hidden }}
+    	{{ review_form.user.as_hidden }}
+	<h4> Rating: {{ review_form.rating }} </h4>
+	<h4> Description: {{ review_form.description }} </h4>
+	<input type="submit" class="btn " value="Leave Review" />
     </form>
 
 </body>
