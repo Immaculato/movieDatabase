@@ -7,6 +7,23 @@
             <link rel="stylesheet" href="{% static 'css/register.css' %}">
         </head>
  <body>
+
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav">
+                          <li><a href="/">Home</a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if is_manager %}
+                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
+                            {% endif %}
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+                        </ul>
+                      </div>
+                </nav>
 	<div class ="container">
 
     		<div class="outer">

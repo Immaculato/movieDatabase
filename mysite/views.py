@@ -11,11 +11,14 @@ def must_be_manager_response():
 
 
 def home_page(request):
-	return render(request, 'home_page.html', {'is_manager': is_manager(request)})
+
+	return render(request, 'home_page.html', { 'is_manager': is_manager(request)})
 	
 def manager_page(request):
 	if is_manager(request):
 		return render(request, 'manager_page.html')
+	else:
+		return HttpResponse('Must be logged in as a manager to access this page.')
 
 def log_in(request):
 	errors = []
@@ -91,6 +94,7 @@ def edit_crew(request,crew_id=None):
 
 		return render(request,'edit_crew.html',{'crew_form':crew_form,'crew_id':crew_id})
 	else:
+
 		return HttpResponse('Must be logged in as a manager to edit crew')
 
 def modify_crew(request):
@@ -211,13 +215,14 @@ def search(request):
 								'tag': tag_q,
 								'crew': crew_q,
 								'title': title_q,
-								'movies': movies.distinct, })
+								'movies': movies.distinct})
 
 	else:
 
 		genres = Genre.objects.all()	
 		return render(request, 'search_form.html', {'errors': errors,
 							    'genres': genres,})
+
 
 
 def movie(request):
@@ -234,7 +239,7 @@ def movie(request):
 		return render(request, 'movie_info.html',
                              {'movie': results, 'genre': genre,
 			      'tags': tags, 'crew': crew, 'ID': ID,
-			      'reviews': review, 'is_manager': is_manager(request)})
+			      'reviews': review})
 
 def promote(request):
 	if is_manager(request):
@@ -267,9 +272,3 @@ def modify_movie(request):
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
 
-def movies_by_genres(request):
-	if 'g_id' in request.GET:
-		ID = request.GET['g_id']
-		results = Movie.objects.filter(genre__id=ID)
-		return render(request, 'movies_by_genre.html',
-                             {'movies': results, 'ID': ID})

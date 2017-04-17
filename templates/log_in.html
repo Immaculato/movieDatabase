@@ -6,11 +6,29 @@
         <link rel="stylesheet" href="{% static 'css/log_in.css' %}"></head>
 <body>
 
+               <nav class="navbar navbar-default navbar-static-top">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                        </div>
+                        <ul class="nav navbar-nav">
+                          <li><a href="/">Home</a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if is_manager %}
+                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
+                            {% endif %}
+                            <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+                            <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+                        </ul>
+                      </div>
+                </nav>
 	<!--https://codepen.io/OldManJava/pen/bwupj -->
 		<div class ="container">
     		<div class="outer">
- 			 <div class="middle">
+<!-- 			 <div class="middle"> -->
     			<div class="inner">
+
 					    {% if errors %}
 
 						{% for error in errors %}
@@ -20,6 +38,7 @@
 						{% endfor %}
 
 					    {% endif %}
+
 					<form action="/login/" method="post" />
 					{% csrf_token %}
 
@@ -37,8 +56,8 @@
 			
 			
     		<div class="outer1">
- 			 <div class="middle1">
-    			<div class="inner1">
+<!-- 			 <div class="middle1">-->
+    			<div class="inner">
     				<p> Don't have an account? <br> <a href="/register">Register Now</a></p>
     					</div>
     				</div>

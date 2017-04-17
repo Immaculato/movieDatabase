@@ -31,6 +31,5 @@ urlpatterns = [
 	url(r'^edit_crew/$', edit_crew),
 	url(r'^search/$', search),
     url(r'^movie/$', movie),
-    url(r'^movies_by_genres/$', movies_by_genres),
     url(r'^manager_page/$', manager_page)
 ]
