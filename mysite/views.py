@@ -44,7 +44,7 @@ def edit_movie(request,movie_id=None):
 
 				elif request.POST['action'] == 'Add Genre': 
 					disable_empty_checks(movie_form)
-					tag_form  = GenreForm(request.POST)
+					tag_form  = TagForm(request.POST)
 					disable_empty_checks(tag_form)
 					genre_form = GenreForm(request.POST)
 					force_empty_checks(genre_form)
