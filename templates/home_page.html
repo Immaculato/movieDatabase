@@ -1,56 +1,61 @@
+
+
 {% load staticfiles %}
   <html>
         <head>
             <!-- LINK TO BOOTSTRAP STUFF -->
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
             <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
 
 
 	<style type="text/css">
 		.jumbotron h1 {
 		    color: white;
+		    text-shadow: 2px 2px 1px black;
 		}
-
 		.jumbotron{
 		    background-color: #042CC9;
+                        background-size: cover;
+                        height: 20%;
+                    background-image: url(http://i.imgur.com/fVJHPm3.jpg);
 		    margin-top: -20;
 		    padding: 0px;
 		    text-align: center;
 		    margin-bottom: -15;
-		    margin-left: 10%;
-		    margin-right: 10%;
 		}
+	body{background-color: whitesmoke !important;}
+		.jumbotron, .navbar{ margin-left: 12%; margin-right: 13%;
+			border-radius: 7px; 
 
+			border-left: outset black;
+			border-right: outset black;
+		}
 		.jumbotron p{
-		    text-align: center;
 		    color: #E0E0E0;
 		}	
-		.navbar{
-		    margin-left: 10%;
-		    margin-right:10%;
-		}
+		 #about {border-radius: 5px; min-height: 100%; background-color: white;
+			border-left: outset black;
+			border-right: outset black;
+			margin-left: 12%; margin-right: 12%;}
 	</style>
         </head>
          <body>
-
                 <div class="jumbotron">
-
 		<center>
-                    <h1  class="display-3">Movies 405</h1>
-                    <p class= "lead">A simple movie database.</p>
+                    <h1  class="display-3">DKLT DB</h1>
+                    <p class= "lead">A simple movie database</p>
 		</center>
-
                 </div>
+
                <nav class="navbar navbar-default navbar-static-top">
-
-
                       <div class="container-fluid">
                         <div class="navbar-header">
                         </div>
                         <ul class="nav navbar-nav">
                           <li><a href="/">Home</a></li>
-                          <li class="nav navbar-nav"><a href="#contribute">Contributions</a></li>
+                          <li class="nav navbar-nav"><a href="/contributions">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
 
@@ -67,13 +72,17 @@
                       </div>
                 </nav>
 
-
+<!-- -->
                 
                 <div id="about" class="abt-container">
                     <div class="row">
                     <div class="col-sm-8 col-sm-offset-2" >
-                        <h2>About</h2>   
+                        <center><h2>About</h2></center> 
+
+			<br>
                          <p>This website implements a django powered movie database. Registering for this website allows you to:
+
+			<br>
 
                          <ul>
                             <li>Search for movies based on <em>genre</em>, <em>title</em>, <em>movie crew</em> </li>
@@ -81,29 +90,13 @@
                             <li>Add reviews to movies</li>
                             <li>Rate movies. Let us know what movies are your favorite!</li>
                          </ul>
+			<br>
                          If you are lucky enough to be a manager, you will be able to add, delete, and modify the movies we have on record!
                          </p>
                     </div>
                 </div>
                 </div>
 
-                <div id="contribute" class="abt-container">
-                    <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2" >
-                        <h2>Contributions</h2>   
-                         <p>This website was created by Daniel Ng, Katie Long, Lucian Hymer, and Tristan Basil. Each team member helped with nearly every part of the project in addition to their focus area for this project.  
-
-                         <ul>
-                            <li>Daniel: Co-created the search function and its method of displaying the results. Assisted with HTML and CSS styling. </li>
-                            <li>Katie: Handled front-end HTML and CSS design along with the connecting of the two. Co-created the add review function. </li>
-                            <li>Lucian: Created the register, login, add movie, update movie, add crew, and update crew forms. </li>
-                            <li>Tristan: Co-created the search functionality and its method of displaying the results. Co-created the add review function. </li>
-                         </ul>
-                    
-			</p>
-                    </div>
-                </div>
-                </div>
  
  
  

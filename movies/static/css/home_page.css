@@ -1,3 +1,4 @@
+
 .jumbotron h1 {
     color: white;
 }
@@ -5,7 +6,6 @@
 .jumbotron{
     background-color: #042CC9;
     margin-top: 0;
-    padding: 0px;
     text-align: center;
     margin-bottom: 0;
 
@@ -51,7 +51,7 @@ a:visited{
 }
 
 body{
-    background: url(https://i.imgur.com/L4H1c3s.jpg);
+    background-color: whitesmoke;
 }
 
 /* https://stackoverflow.com/questions/16625972/change-color-of-bootstrap-navbar-on-hover-link */

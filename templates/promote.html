@@ -3,16 +3,51 @@
 <head>
 	        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-            
+          <style type="text/css">
+                .jumbotron h1 {
+                    color: white;
+                    text-shadow: 2px 2px 1px black;
+                }
+                .jumbotron{
+                    background-color: #042CC9;
+                    margin-top: -20px;
+                    padding: 0px;
+                    text-align: center;
+                    margin-bottom: -15px;
+                        background-size: cover;
+                        height: 20%;
+                    background-image: url(http://i.imgur.com/fVJHPm3.jpg);
+                }
+		body{background-color: whitesmoke !important;}
+                .jumbotron, .navbar{ margin-left: 12%; margin-right: 12%;
+                        border-radius: 7px;
+
+                        border-left: outset black;
+                        border-right: outset black;
+                }
+                .navbar{ margin-bottom: 0px;}
+                .jumbotron p{                    color: #E0E0E0;                }
+                 #search {border-radius: 5px; background-color: white;
+                        margin-left:12%; margin-right:12%;
+                        border-left: outset black;
+                        border-right: outset black;
+                        min-height: 100%;}
+        </style>            
         </head>
          <body>
+                <div class="jumbotron">
+                <center>
+                    <h1  class="display-3">DKLT DB</h1>
+                    <p class= "lead">A simple movie database</p>
+                </center>
+                </div>
                <nav class="navbar navbar-default navbar-static-top">
                       <div class="container-fluid">
                         <div class="navbar-header">
                         </div>
                         <ul class="nav navbar-nav">
                           <li><a href="/">Home</a></li>
-                          <li class="nav navbar-nav"><a href="/">Contributions</a></li>
+                          <li class="nav navbar-nav"><a href="/contributions">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             {% if is_manager %}
@@ -24,21 +59,32 @@
                         </ul>
                       </div>
                 </nav>  
+                <div id="search" class="abt-container">
+                    <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2" >
+		<center><h2>Manage User Privileges</center></h2>
+                        <br>
 
-<form action="/promote/" method="post" />
-	{% csrf_token %}
-	{% if users %}
-	    <select name="to_be_promoted" multiple>
-		{% for user in users %}
-		<option value="{{user.email}}">{{user}}</option> 
-		{% endfor %}
-	    </select>
-	    <br />
-	    <input type="submit" value="Promote Users" />
-	{% else %}
-	    No users to promote
-	{% endif %}
-</form> 
+	<form action="/promote/" method="post" />
+		{% csrf_token %}
+		{% if users %}
+		    <select id='promote' name="to_be_promoted" multiple>
+			{% for user in users %}
+			<option value="{{user.email}}">{{user}}</option> 
+			{% endfor %}
+		    </select>
+		    <br />
+		    <input type="submit" value="Promote Users" />
+		{% else %}
+		    No users to promote
+		{% endif %}
+	</form> 
+                <br><br><br>
+                <br><br><br>
+                <br><br><br>
+                <br><br><br>
+                <br><br><br><br>
+                </div></div></div>
 
 </body>
 </html>
