@@ -1,5 +1,4 @@
 
-
 {% load staticfiles %}
   <html>
         <head>
@@ -7,53 +6,9 @@
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
             <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
-
-
-	<style type="text/css">
-		.jumbotron h1 {
-		    color: white;
-		    text-shadow: 2px 2px 1px black;
-		}
-		.jumbotron{
-		    background-color: #042CC9;
-                        background-size: cover;
-                        height: 20%;
-                    background-image: url(http://i.imgur.com/fVJHPm3.jpg);
-		    margin-top: -20;
-		    padding: 0px;
-		    text-align: center;
-		    margin-bottom: -15;
-		}
-		.jumbotron, .navbar{ margin-left: 12%; margin-right: 13%;
-			border-radius: 7px; 
-			border-left: outset black;
-			border-right: outset black;
-		}
-		.jumbotron p{
-		    color: #E0E0E0;
-		}	
-		#contribute, #about {border-radius: 5px; background-color: white; min-height: 100%;
-			border-left: outset black;
-			border-right: outset black;
-			margin-left: 12%; margin-right: 12%;}
-		#caption { margin-left: 4.5%;}
-	.container img {
-	    width: 50%;
-	    height: auto;
-	    margin-left: 3%;
-	}
-	</style>
         </head>
          <body>
 
-                <div class="jumbotron">
-
-		<center>
-                    <h1  class="display-3">DKLT DB</h1>
-                    <p class= "lead">A simple movie database</p>
-		</center>
-
-                </div>
                <nav class="navbar navbar-default navbar-static-top">
 
 
@@ -61,11 +16,10 @@
                         <div class="navbar-header">
                         </div>
                         <ul class="nav navbar-nav">
-			 <li><a href="/">Home</a></li>
+                          <li><a href="/">Home</a></li>
                           <li class="nav navbar-nav"><a href="/contributions">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-
 
                             {% if is_manager %}
                                 <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
@@ -79,43 +33,30 @@
                       </div>
                 </nav>
 
-<!-- -->
+                <div class="jumbotron">
 
-
-                <div id="contribute" class="abt-container">
+                    <h1  class="display-3">Movies 405</h1>
+                    <p class= "lead">A simple movie database.</p>
+                </div>
+                
+                <div id="about" class="abt-container">
                     <div class="row">
                     <div class="col-sm-8 col-sm-offset-2" >
-<center>                        <h2>Contributions</h2> </center> 
-		<div id='pic' class='container'><a href="http://imgur.com/JojDgrb"><img src="http://i.imgur.com/JojDgrb.jpg" title="source: imgur.com" /></a>
-		<br>
-		<div id='caption'><h6>Lucian, Katie, Daniel, and Tristan posing next to an early version of their website.</h6></div>
-		</div>
-			    <br>
-                         <p>This website was created by Daniel Ng, Katie Long, Lucian Hymer, and Tristan Basil. Each team member helped with nearly every part of the project in addition to their focus area for this project.
-
-                         <ul>
-			    <br>
-                            <li><strong>Daniel:</strong> Co-created the search function and its method of displaying the results. Assisted with HTML and CSS styling. </li>
-			    <br>
-                            <li><strong>Katie:</strong> Handled front-end HTML and CSS design along with the connecting of the two. Co-created the add review function. </li>
-
-			    <br>
-                            <li><strong>Lucian:</strong> Created the register, login, add movie, update movie, add crew, and update crew forms. </li>
-			    <br>
-                            <li><strong>Tristan:</strong> Co-created the search functionality and its method of displaying the results. Co-created the add review function. </li>
-			    <br>
-                         </ul>
-
-                        </p>
-
+                        <h2>Contributions</h2>   
+                         <p>
+				Daniel Ng:
+				<br>
+				Tristan Basil:
+				<br>
+				Katie Long:
+				<br>
+				Lucian Hymer:
+				<br>
+                         </p>
                     </div>
                 </div>
                 </div>
-
-
-
+ 
          </body>
-
+ 
   </html>
-
-
