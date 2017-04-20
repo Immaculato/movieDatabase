@@ -67,10 +67,10 @@ def edit_movie(request,movie_id=None):
 			disable_empty_checks(genre_form)
 			disable_empty_checks(tag_form  )
 
-		options = {'movie_form':movie_form,'genre_form':genre_form,'tag_form':tag_form, 'is_manager': is_manager(request)}
+		options = {'movie_form':movie_form,'genre_form':genre_form,'tag_form':tag_form}
 		if movie_id:
 			options['movie_id'] = movie_id
-		return render(request,'edit_movie.html',options)
+		return render(request,'edit_movie.html',options, {'is_manager': is_manager(request)})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
 
@@ -160,8 +160,7 @@ def edit_crew(request,crew_id=None):
 		else:
 			crew_form = CrewForm(instance=crew_instance)
 
-		return render(request,'edit_crew.html',{'crew_form':crew_form,'crew_id':crew_id,
-							'is_manager': is_manager(request)})
+		return render(request,'edit_crew.html',{'crew_form':crew_form,'crew_id':crew_id})
 	else:
 
 		return HttpResponse('Must be logged in as a manager to edit crew')
@@ -177,7 +176,7 @@ def modify_crew(request):
 					Crew.objects.filter(id=crew_id).delete()
 					
 		crew_members = Crew.objects.all()
-		return render(request, 'modify_crew.html',{'crew_members':crew_members, 'is_manager': is_manager(request)})
+		return render(request, 'modify_crew.html',{'crew_members':crew_members})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit crew')
 
@@ -286,7 +285,7 @@ def promote(request):
 				return HttpResponse('Successfully promoted %s'%', '.join(new_manager_emails))
 		else:
 			normal_users = User.objects.filter(manager=False)
-			return render(request, 'promote.html',{'users':normal_users, 'is_manager': is_manager(request)})
+			return render(request, 'promote.html',{'users':normal_users})
 	else:
 		return HttpResponse('Must be logged in as a manager to promote')
 
@@ -301,7 +300,7 @@ def modify_movie(request):
 					Movie.objects.filter(id=movie_id).delete()
 					
 		movies = Movie.objects.all()
-		return render(request, 'modify_movie.html',{'movies':movies, 'is_manager': is_manager(request)})
+		return render(request, 'modify_movie.html',{'movies':movies})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
 

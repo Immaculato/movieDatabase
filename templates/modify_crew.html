@@ -12,13 +12,9 @@
                         </div>
                         <ul class="nav navbar-nav">
                           <li><a href="/">Home</a></li>
-                          <li class="nav navbar-nav"><a href="/">Contributions</a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-
-                            {% if is_manager %}
-                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
-                            {% endif %}
                             <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
                             <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
                             <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>

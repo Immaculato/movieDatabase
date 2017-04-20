@@ -5,19 +5,14 @@
 .jumbotron{
     background-color: #042CC9;
     margin-top: 0;
-    padding: 0px;
-    text-align: center;
-    margin-bottom: 0;
-
+    padding: 20px;
 }
 
 .jumbotron p{
-    text-align: center;
     color: #E0E0E0;
 }
 
 .navbar{
-    margin-top: 0;
     margin-bottom: 0;
 }
 
