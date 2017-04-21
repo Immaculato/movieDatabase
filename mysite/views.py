@@ -196,8 +196,15 @@ def search(request):
 	errors = []
 	g_ids = []
 	if 'Search' in request.GET:
-
-		movies = Movie.objects.all().order_by('title')
+		movies = Movie.objects.all()
+		if 'sort_by' in request.GET:
+			sort_by = request.GET['sort_by']
+			if sort_by == 'title':
+				movies = movies.order_by('title')
+			elif sort_by == 'runtime':
+				movies = movies.order_by('duration')
+			elif sort_by == 'year':
+				movies = movies.order_by('release_date')
 		if 'g_id' in request.GET:
 			g_ids = request.GET.getlist('g_id')
 			if g_ids:
@@ -274,7 +281,6 @@ def add_tag(request):
 			movie_id = request.POST['movie_id']
 			tag_form = TagForm(request.POST)
 			results = Movie.objects.get(pk=movie_id)
-			print(tag_form)
 			if tag_form.is_valid():
 				tag_form.save()
 				genre_form = GenreForm()
