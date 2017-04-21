@@ -29,12 +29,6 @@ class Movie(models.Model):
 		return '%s (%s)' % (self.title,self.release_date.year)
 
 
-
-
-#	review = models.ForeignKey(Review, on_delete=models.CASCADE, default=None, blank=True, null=True)
-
-
-
 class User(models.Model):
 	GENDER_CHOICES = (
 	('M', 'Male'),
@@ -66,13 +60,6 @@ class Review(models.Model):
 		return self.description
 
 
-
-
-
-#class Movie_Has_Tag(models.Model):
-#	m_id = models.ManyToManyField(Movie)	
-#	t_id = models.ManyToManyField(Tag)
-
 class Crew(models.Model):
 	crew_first_name = models.CharField(max_length=15)
 	crew_last_name = models.CharField(max_length=15)
@@ -81,12 +68,3 @@ class Crew(models.Model):
 
 	def __str__(self):
 		return u'%s %s' % (self.crew_first_name, self.crew_last_name)
-
-class WatchList(models.Model):
-	movies = models.ManyToManyField(Movie)
-	user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
-
-	def __str__(self):
-		return u'%s' % (self.id)
-
-
