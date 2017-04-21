@@ -30,7 +30,7 @@ urlpatterns = [
 	url(r'^edit_crew/update_id=(\d+)$', edit_crew),
 	url(r'^edit_crew/$', edit_crew),
 	url(r'^search/$', search),
-
+	url(r'^add_tag/$', add_tag),
     url(r'^movie/$', movie),
     url(r'^manager_page/$', manager_page),
     url(r'^add_review/$', add_review)

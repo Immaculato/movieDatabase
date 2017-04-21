@@ -64,7 +64,17 @@
 			</div>
 		{% endfor %}
 	</div>
-					
+
+
+	<form action="/add_tag/" method="post" />
+		{% csrf_token %}
+		<h3> Add Tag: </h3> 
+		{{ tag_form.t_name }}
+		<input type="hidden" value="{{ movie.id }}" name = "movie_id">
+	<input type="submit" class="btn " value="Leave Tag" />
+	</form>
+	
+	
 	<form action="/add_review/" method="post" />
 		{% csrf_token %}
 	<hr class="my-4">

@@ -67,10 +67,10 @@ def edit_movie(request,movie_id=None):
 			disable_empty_checks(genre_form)
 			disable_empty_checks(tag_form  )
 
-		options = {'movie_form':movie_form,'genre_form':genre_form,'tag_form':tag_form}
+		options = {'movie_form':movie_form,'genre_form':genre_form,'tag_form':tag_form, 'is_manager': is_manager(request)}
 		if movie_id:
 			options['movie_id'] = movie_id
-		return render(request,'edit_movie.html',options, {'is_manager': is_manager(request)})
+		return render(request,'edit_movie.html',options)
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
 
@@ -160,7 +160,8 @@ def edit_crew(request,crew_id=None):
 		else:
 			crew_form = CrewForm(instance=crew_instance)
 
-		return render(request,'edit_crew.html',{'crew_form':crew_form,'crew_id':crew_id})
+		return render(request,'edit_crew.html',{'crew_form':crew_form,'crew_id':crew_id,
+							'is_manager': is_manager(request)})
 	else:
 
 		return HttpResponse('Must be logged in as a manager to edit crew')
@@ -176,7 +177,7 @@ def modify_crew(request):
 					Crew.objects.filter(id=crew_id).delete()
 					
 		crew_members = Crew.objects.all()
-		return render(request, 'modify_crew.html',{'crew_members':crew_members})
+		return render(request, 'modify_crew.html',{'crew_members':crew_members, 'is_manager': is_manager(request)})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit crew')
 
@@ -247,12 +248,13 @@ def movie(request):
 		
 		user_id = request.session['userID']
 		review_form = ReviewForm(initial={'movie': ID, 'user': user_id})
+		tag_form = TagForm()
 
 		
 		return render(request, 'movie_info.html',
                              {'movie': results, 'genre': genre,
 			      'tags': tags, 'crew': crew, 'ID': ID,
-			      'reviews': review, 'is_manager': is_manager(request), 'review_form': review_form})
+			      'reviews': review, 'is_manager': is_manager(request), 'review_form': review_form, 'tag_form': tag_form})
 
 def add_review(request):
 
@@ -261,17 +263,32 @@ def add_review(request):
 		review_form = ReviewForm(request.POST, instance=review_instance)
 
 		if review_form.is_valid():
-			"""
-			imm = review_form.cleaned_data['movie']
-			print("INTER: ", imm)
-			ID = Movie.objects.filter(title=imm)
-			print("ID: ", ID)
-			"""
 			review_form.save()
 		else:
 			return HttpResponse('Invalid form input')
-	'''return redirect('/search/', request)'''
-	return HttpResponse("Thanks for the commnent. Go back and refresh to see your comment!")
+	return HttpResponse("Thanks for the comment. Go back and refresh to see your comment!")
+
+def add_tag(request):
+	if request.method == "POST":
+		if 'movie_id' in request.POST:
+			movie_id = request.POST['movie_id']
+			tag_form = TagForm(request.POST)
+			results = Movie.objects.get(pk=movie_id)
+			print(tag_form)
+			if tag_form.is_valid():
+				tag_form.save()
+				genre_form = GenreForm()
+				disable_empty_checks(genre_form)
+				tag_form = TagForm()
+				disable_empty_checks(tag_form)
+				movie_instance = Movie.objects.get(id=movie_id)
+				movie_instance.tag.add(Tag.objects.get(t_name=request.POST['t_name']))
+				movie_form = MovieForm(instance=movie_instance)
+				
+		else:
+			return HttpResponse('Invalid form input')
+	return redirect('/movie/?id=%s'%movie_instance.id, request)
+
 
 def promote(request):
 	if is_manager(request):
@@ -285,7 +302,7 @@ def promote(request):
 				return HttpResponse('Successfully promoted %s'%', '.join(new_manager_emails))
 		else:
 			normal_users = User.objects.filter(manager=False)
-			return render(request, 'promote.html',{'users':normal_users})
+			return render(request, 'promote.html',{'users':normal_users, 'is_manager': is_manager(request)})
 	else:
 		return HttpResponse('Must be logged in as a manager to promote')
 
@@ -300,7 +317,7 @@ def modify_movie(request):
 					Movie.objects.filter(id=movie_id).delete()
 					
 		movies = Movie.objects.all()
-		return render(request, 'modify_movie.html',{'movies':movies})
+		return render(request, 'modify_movie.html',{'movies':movies, 'is_manager': is_manager(request)})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
 
