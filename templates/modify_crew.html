@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+{% load staticfiles %}
+
 <html>
 <head>
 	        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-            
+            <link rel="stylesheet" href="{% static 'css/modify.css' %}">
+
         </head>
          <body>
                <nav class="navbar navbar-default navbar-static-top">
@@ -21,7 +23,9 @@
                         </ul>
                       </div>
                 </nav>  
-
+<div class="outer">
+	<div class="middle">
+		<div class="inner">
 <form action="/modify_crew/" method="post" />
 	{% csrf_token %}
 	{% if crew_members %}
@@ -31,12 +35,15 @@
 		{% endfor %}
 	    </select>
 	    <br />
-	    <input type="submit" name="operation" value="Remove" />
-	    <input type="submit" name="operation" value="Modify" />
+	    <input class=" btn btn-primary" type="submit" name="operation" value="Remove" />
+	    <input class=" btn btn-primary" type="submit" name="operation" value="Modify" />
 	{% else %}
 	    No crew to modify
 	{% endif %}
 </form> 
+    </div>
+    </div>
+    </div>
 
 </body>
 </html>

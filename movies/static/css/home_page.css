@@ -55,3 +55,18 @@ body{
     color: #0C0D0D;
 }
 
+
+.pic-cont{
+    margin: auto;
+    display:block;
+    width: 40%;
+
+}
+
+#caption{
+    margin: auto;
+    
+    float: none
+}
+
+

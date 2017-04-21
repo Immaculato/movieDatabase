@@ -1,10 +1,12 @@
+{% load staticfiles %}
 <html>
 <head>
         <title>Search</title>
 <!-- LINK TO BOOTSTRAP STUFF -->
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-            
+        <link rel="stylesheet" href="{% static 'css/search.css' %}">
+
         </head>
          <body>
                <nav class="navbar navbar-default navbar-static-top">
@@ -33,24 +35,35 @@
                 </ul>
         {% endif %}
         <form action="/search/" method="get">	
-		<strong>Select genre(s): </strong>
-		<br>
-		{% for genre in genres %}
-			<input type="checkbox" name='g_id' value={{genre.id}}> {{genre.g_name}}<br>
-		{% endfor %}
-                <br>
+		<div class="move-container">
+		    <div class="row">
+    	    <div class="col-md-4">
+    	        Title Search:
+    		    <input type="text" size="45" name="title_q">
+            </div>
+            <div class="col-md-4">
+    	    	Crew Search:
+    	    	<input type="text" name="crew_q" placeholder="First name">
+    	    	<input type="text" name="crew_q2" placeholder='Last name'>
+    		</div>
+    		
+    		<div class="col-md-4">
                 Tag Search:
                 <input type="text" name="tag_q">
-                <br>
-		Crew Search:
-		<input type="text" name="crew_q" placeholder="First name">
-		<input type="text" name="crew_q2" placeholder='Last name'>
-		<br>
-		Title Search:
-		<input type="text" name="title_q">
-		<br>
-		<input type="submit" name="Search">	
-		<br>
-        </form>
+                 		     
+    		    <input type="submit" class="btn btn-primary btn-large" name="Search">	
+    		</div>
+    		</div>
+    		<div class="row2">
+		        <div class="col-md-2 justify-content-center">
+    		<strong>Select genre(s): </strong>
+    		<br>
+    		{% for genre in genres %}
+    			<input type="checkbox" name='g_id' value={{genre.id}}> {{genre.g_name}}
+    		{% endfor %}
+    	    </div>
+            </form>
+        	</div>
+        </div>
 </body>
 </html>

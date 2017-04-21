@@ -1,30 +1,41 @@
-
-
-.container{
-  padding: 0;
+.info{
+    font-size: 18px;
+  
+    font-family: Helvetica;
 }
 
-.button{
-  margin: 0 auto;
+.btn{
+    background: #042CC9;
 }
 
-.outer {
-    display: table;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+.genre_info{
+    justify-content:center;
+    font-size: 18px;
+    font-family: Helvetica;
 }
 
-.middle {
-    display: table-cell;
-    vertical-align: middle;
+.tag_info{
+    margin: 0;
+
+    font-family: Helvetica;
+    font-size: 18px;
 }
 
-.inner {
-    margin-left: auto;
-    margin-right: auto; 
-    background-color: #C4C4C4;
-    border-radius: 5px;
-    padding: 30px 20px 10px 30px;
-    width: 50%/*whatever width you want*/;
+.content-container{
+    padding: 10px;
 }
+
+.row{
+    margin: 10px;
+}
+
+.genre-tag{
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+hr{
+border-top: 1px solid #8c8b8b;
+    
+}
+
