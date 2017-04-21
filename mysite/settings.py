@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-if not 'USE_MYSQL' in os.environ:
+if 'USE_SQLLITE' in os.environ:
 	DATABASES = {
 	    'default': {
 	        'ENGINE': 'django.db.backends.sqlite3',
@@ -85,7 +85,6 @@ if not 'USE_MYSQL' in os.environ:
 	    }
 	}
 else:
-	print("Using mysql")
 	DATABASES = {
 	    'default': {
 	        'ENGINE': 'django.db.backends.mysql', 
