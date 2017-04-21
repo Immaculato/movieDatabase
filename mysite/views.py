@@ -177,7 +177,7 @@ def modify_crew(request):
 				elif request.POST['operation'] == 'Remove':
 					Crew.objects.filter(id=crew_id).delete()
 					
-		crew_members = Crew.objects.all()
+		crew_members = Crew.objects.all().order_by('crew_last_name')
 		return render(request, 'modify_crew.html',{'crew_members':crew_members, 'is_manager': is_manager(request)})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit crew')
@@ -308,7 +308,7 @@ def promote(request):
 					new_manager.save()
 				return HttpResponse('Successfully promoted %s'%', '.join(new_manager_emails))
 		else:
-			normal_users = User.objects.filter(manager=False)
+			normal_users = User.objects.filter(manager=False).order_by('email')
 			return render(request, 'promote.html',{'users':normal_users, 'is_manager': is_manager(request)})
 	else:
 		return HttpResponse('Must be logged in as a manager to promote')
@@ -323,7 +323,7 @@ def modify_movie(request):
 				elif request.POST['operation'] == 'Remove':
 					Movie.objects.filter(id=movie_id).delete()
 					
-		movies = Movie.objects.all()
+		movies = Movie.objects.all().order_by('title')
 		return render(request, 'modify_movie.html',{'movies':movies, 'is_manager': is_manager(request)})
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
