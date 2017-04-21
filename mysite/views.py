@@ -197,7 +197,7 @@ def search(request):
 	g_ids = []
 	if 'Search' in request.GET:
 
-		movies = Movie.objects.all()
+		movies = Movie.objects.all().order_by('title')
 		if 'g_id' in request.GET:
 			g_ids = request.GET.getlist('g_id')
 			if g_ids:
