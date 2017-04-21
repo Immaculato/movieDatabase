@@ -34,7 +34,7 @@ class RegisterForm(ModelForm):
 class MovieForm(ModelForm):
     class Meta:
         model = Movie
-        fields = ['title','description','release_date','language','genre','tag']
+        fields = ['title','description','release_date','language', 'duration', 'genre','tag']
 
 class CrewForm(ModelForm):
 	class Meta:

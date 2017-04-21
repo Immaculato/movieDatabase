@@ -23,12 +23,17 @@ class Movie(models.Model):
 	language = models.CharField(max_length=15)
 	genre = models.ManyToManyField(Genre)
 	tag = models.ManyToManyField(Tag,blank=True)
+	duration = models.IntegerField()
+
+	def __str__(self):
+		return '%s (%s)' % (self.title,self.release_date.year)
+
+
 
 
 #	review = models.ForeignKey(Review, on_delete=models.CASCADE, default=None, blank=True, null=True)
 
-	def __str__(self):
-		return '%s (%s)' % (self.title,self.release_date.year)
+
 
 class User(models.Model):
 	GENDER_CHOICES = (
@@ -76,5 +81,12 @@ class Crew(models.Model):
 
 	def __str__(self):
 		return u'%s %s' % (self.crew_first_name, self.crew_last_name)
+
+class WatchList(models.Model):
+	movies = models.ManyToManyField(Movie)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
+
+	def __str__(self):
+		return u'%s' % (self.id)
 
 

@@ -34,9 +34,14 @@ class GenreAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
 	search_fields = ('t_name',)
 
+class WatchListAdmin(admin.ModelAdmin):
+	list_display = ('id', 'user')
+
+
 admin.site.register(Genre, GenreAdmin)
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Crew, CrewAdmin)
 admin.site.register(User, UserAdmin)
 admin.site.register(Review)
+admin.site.register(WatchList)

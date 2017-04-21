@@ -33,10 +33,11 @@
 <form action="/edit_movie/" method="post">
 {% endif %}
 	{% csrf_token %}
-	   <p class="info"> Title: {{ movie_form.title }}
-	       Description: {{ movie_form.description }}
-	       Release Date: {{ movie_form.release_date }}
-	       Language: {{ movie_form.language }}
+	   <p class="info"> Title: {{ movie_form.title }} <br>
+	       Description: {{ movie_form.description }} <br>
+	       Release Date: {{ movie_form.release_date }} <br>
+	       Language: {{ movie_form.language }} <br>
+         Duration: {{ movie_form.duration }} <br>
 	       <input type="submit" class=" btn btn-primary" name="action" value="Submit Movie" />
 	  </p>
 	  
