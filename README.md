@@ -52,4 +52,5 @@ Finally, install Django.
 ## Acknowledgments
 
 * This is a work in progress.
+* Go to mysite/settings.py and go to lines 93-94 and change the MySQL username/password. 
 * This was a good learning process on the use of a MVC framework. 
