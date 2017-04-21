@@ -11,10 +11,12 @@
                         <div class="navbar-header">
                         </div>
                         <ul class="nav navbar-nav">
-                          <li><a href="/">Home</a></li>
-                          <li class="nav navbar-nav"><a href="/contributions">Contributions</a></li>
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
+                          <li class="disabled"><a href="#contribute">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+
+
                             {% if is_manager %}
                                 <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
                             {% endif %}

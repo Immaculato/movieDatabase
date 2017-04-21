@@ -1,13 +1,16 @@
 {% load staticfiles %}
-<html>
-<head>
-	        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <html>
+        <head>
+            <!-- LINK TO BOOTSTRAP STUFF -->
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-            <link rel="stylesheet" href="{% static 'css/man_page.css' %}">
-
+<!--            <link rel="stylesheet" href="{% static 'css/home_page.css' %}"> -->
         </head>
          <body>
+
                <nav class="navbar navbar-default navbar-static-top">
+
+
                       <div class="container-fluid">
                         <div class="navbar-header">
                         </div>
@@ -22,26 +25,19 @@
                             {% if is_manager %}
                                 <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
                             {% endif %}
+
                             <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+
                             <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
+
                             <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
                         </ul>
                       </div>
-                </nav> 
-          
-	<div class="outer">
-	    <div class="middle">
-		<div class="inner">
-        <div class="button-bar">
-            <a class="colorbtn btn btn-primary btn-lg btn-block" href="/edit_movie">Add Movie</a>
-            <a class="colorbtn btn btn-primary btn-lg btn-block" href="/modify_movie">Edit/Delete Movies</a>
-            <a class="colorbtn btn btn-primary btn-lg btn-block" href="/edit_crew">Add Movie Crew Member</a>
-            <a class="colorbtn btn btn-primary btn-lg btn-block" href="/modify_crew">Edit/Delete Movie Crew Members</a>
-            <a class="colorbtn btn btn-primary btn-lg btn-block" href="/promote">Manage User Privileges</a>
-        </div>
-        </div>
-        </div>
-    </div>
+                </nav>
 
-</body>
-</html>
+
+
+
+         </body>
+
+  </html>

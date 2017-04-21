@@ -11,11 +11,17 @@
                         <div class="navbar-header">
                         </div>
                         <ul class="nav navbar-nav">
-                          <li><a href="/">Home</a></li>
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
                           <li class="disabled"><a href="#contribute">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+
+
+                            <li ><a href="/user"><span class="glyphicon glyphicon-user"></span> {{ request.session.username}} </a></li>
                             <!--https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+                            {% if is_manager %}
+                                <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
+                            {% endif %}
                             <li ><a href="/search"><span class="glyphicon glyphicon-search"></span> Search </a></li>
                             <li ><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Logout </a></li>
                         </ul>

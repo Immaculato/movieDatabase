@@ -13,10 +13,13 @@
                         <div class="navbar-header">
                         </div>
                         <ul class="nav navbar-nav">
-                          <li><a href="/">Home</a></li>
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
                           <li class="disabled"><a href="#contribute">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+
+
+                            <li ><a href="/user"><span class="glyphicon glyphicon-user"></span> {{ request.session.username}} </a></li>
                             {% if is_manager %}
                                 <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
                             {% endif %}

@@ -107,6 +107,7 @@ def log_in(request):
 						user = user.get()
 						request.session['email'] = user.email
 						request.session['userID'] = user.id
+						request.session['username'] = user.first_name + ' ' + user.last_name
 						response_string = "Hello %s!"%user.first_name
 						if user.manager:
 						    request.session['manager'] = True
@@ -327,4 +328,5 @@ def modify_movie(request):
 	else:
 		return HttpResponse('Must be logged in as a manager to edit movies')
 
-
+def user(request):
+	return render(request, 'user.html',{ 'is_manager': is_manager(request)})

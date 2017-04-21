@@ -14,10 +14,13 @@
                         <div class="navbar-header">
                         </div>
                         <ul class="nav navbar-nav">
-                          <li><a href="/">Home</a></li>
+                          <li><a href="/"><span class='glyphicon glyphicon-home'> Home</span></a></li>
                           <li class="disabled"><a href="#contribute">Contributions</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+
+
+                            <li ><a href="/user"><span class="glyphicon glyphicon-user"></span> {{ request.session.username}} </a></li>
                             {% if is_manager %}
                                 <li ><a href="/manager_page"><span class="glyphicon glyphicon-pencil"></span> Manager Options </a></li>
                             {% endif %}
@@ -38,20 +41,22 @@
 		<div class="move-container">
 		    <div class="row">
     	    <div class="col-md-4">
-    	        Title Search:
+    	        <strong>Title Search:</strong>
     		    <input type="text" size="45" name="title_q">
             </div>
             <div class="col-md-4">
-    	    	Crew Search:
+    	    	<strong>Crew Search:</strong>
+		<br>
     	    	<input type="text" name="crew_q" placeholder="First name">
     	    	<input type="text" name="crew_q2" placeholder='Last name'>
     		</div>
     		
     		<div class="col-md-4">
-                Tag Search:
+                <strong>Tag Search:</strong>
+		<br>
                 <input type="text" name="tag_q">
                  		     
-    		    <input type="submit" class="btn btn-primary btn-large" name="Search">	
+
     		</div>
     		</div>
     		<div class="row2">
@@ -60,6 +65,7 @@
     		<br>
     		{% for genre in genres %}
     			<input type="checkbox" name='g_id' value={{genre.id}}> {{genre.g_name}}
+			<br>
     		{% endfor %}
     	    </div>
             </form>
@@ -74,6 +80,7 @@
                       <input type="radio" name="sort_by" value="year">Release year<br>
                 </div>
             </div>
+    		    <input type="submit" class="btn btn-primary btn-large" name="Search">	
         </div>
 </body>
 </html>
