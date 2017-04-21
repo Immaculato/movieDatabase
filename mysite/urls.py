@@ -33,8 +33,6 @@ urlpatterns = [
 	url(r'^add_tag/$', add_tag),
     url(r'^movie/$', movie),
     url(r'^manager_page/$', manager_page),
-    url(r'^add_review/$', add_review),
-	
-    url(r'^user/$', watch_list)
+    url(r'^add_review/$', add_review)
 
 ]
