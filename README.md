@@ -10,7 +10,7 @@
 ```
 * Python version 2.7, 3.3, 3.4 and 3.5. Python 3+ is recommended.
 * Python virtual environment
-* Django 1.8+
+* Django 1.10+
 ```
 
 ### Installing
@@ -28,7 +28,7 @@ Install virtual environment
 ```
 Finally, install Django.
 ```
-* pip install django==1.8.13 
+* pip install django
 ```
 
 ## Built With
@@ -36,6 +36,7 @@ Finally, install Django.
 * [Python](https://www.python.org/) - The programming language used.
 * [Django](https://www.djangoproject.com/) - The web framework used.
 * [Virtual Environment](http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) - a tool to keep the dependencies required by different projects in separate places
+* [Bootstrap](http://getbootstrap.com/) -  HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
 
 
 
