@@ -330,3 +330,11 @@ def modify_movie(request):
 
 def user(request):
 	return render(request, 'user.html',{ 'is_manager': is_manager(request)})
+def watch_list(request):
+	if request.method == "GET":
+		if 'user_id' in request.GET:
+			user_id = request.GET['user_id']
+			watch_list = WatchList.objects.get(user__id=user_id)
+			return render(request, 'watch_list.html',{'movies':watch_list.movies.all(), 'user':User.objects.get(id=user_id)})
+	return HttpResponse('Oops! Must specify a user to view a watch list.')
+
