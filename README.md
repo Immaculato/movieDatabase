@@ -7,8 +7,7 @@
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 ### Prerequisites
 
 ```
@@ -65,6 +64,8 @@ shell> pip install django
 * [Virtual Environment](http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) - a tool to keep the dependencies required by different projects in separate places
 * [Bootstrap](http://getbootstrap.com/) -  HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
 * [MySQL](https://www.mysql.com/) - Open source database used to handle and store our data.
+* [HTML](https://en.wikipedia.org/wiki/HTML) - standard markup language for creating web pages and web applications.
+* [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) - style sheet language used for describing the presentation of a document written in a markup language.
 
 
 
@@ -80,6 +81,6 @@ shell> pip install django
 ## Acknowledgments
 
 
-* This assumes you are using MySQL. You can change what database you use by altering settings.py
+* This assumes MySQL is being used. You can change what database that is being used by altering settings.py
 * Go to mysite/settings.py and go to lines 93-94 and change the MySQL username/password. 
 * This was a good learning process on the use of a MVC framework. 
