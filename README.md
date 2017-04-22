@@ -2,12 +2,7 @@
 
 - This project aims to design and implement a movie database application including both a backend database and frontend web user interface.
 - The database has the following entities:
---- Crews
-⋅⋅* Genres
-⋅⋅* Movies
-⋅⋅* Reviews
-⋅⋅* Tags
-⋅⋅* Users
+--- Crews, Genres, Movies, Reviews, Tags, Users
 - This web application is designed to allow a manager add, change, and delete data in a movie database.
 - Users will first register and then are able to filter the database with a faceted search.
 
