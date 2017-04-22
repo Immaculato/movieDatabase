@@ -23,9 +23,9 @@
 ```
 Install virtual environment
 ```
-* pip install virtualenv 
-* virtualenv env_mysite 
-* env_mysite\scripts\activate 
+shell> pip install virtualenv 
+shell> virtualenv env_mysite 
+shell> env_mysite\scripts\activate 
 ```
 Install MySQL. We are assuming you're using Linux or Mac OS X. If not, check out how to install MySQL on this page: https://dev.mysql.com/doc/refman/5.7/en/windows-installation.html
 To install and use a MySQL binary distribution, the command sequence looks like this:
@@ -51,7 +51,7 @@ shell> cp support-files/mysql.server /etc/init.d/mysql.server
 ```
 Finally, install Django.
 ```
-* pip install django
+shell> pip install django
 ```
 
 ## Built With
@@ -60,7 +60,7 @@ Finally, install Django.
 * [Django](https://www.djangoproject.com/) - The web framework used.
 * [Virtual Environment](http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/) - a tool to keep the dependencies required by different projects in separate places
 * [Bootstrap](http://getbootstrap.com/) -  HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.
-* [MySQL}(https://www.mysql.com/) - Open source database used to handle and store our data.
+* [MySQL](https://www.mysql.com/) - Open source database used to handle and store our data.
 
 
 
