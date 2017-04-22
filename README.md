@@ -2,7 +2,7 @@
 
 - This project aims to design and implement a movie database application including both a backend database and frontend web user interface.
 - The database has the following entities:
-⋅⋅* Crews
+*** Crews
 ⋅⋅* Genres
 ⋅⋅* Movies
 ⋅⋅* Reviews
