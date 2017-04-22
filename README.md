@@ -33,6 +33,11 @@ shell> virtualenv env_mysite
 shell> env_mysite\scripts\activate 
 ```
 Install MySQL. We are assuming you're using Linux or Mac OS X. If not, check out how to install MySQL on this page: https://dev.mysql.com/doc/refman/5.7/en/windows-installation.html
+
+
+
+This assumes MySQL is being used. You can change what database that is being used by altering settings.py
+Go to mysite/settings.py and go to lines 93-94 and change the MySQL username/password. 
 To install and use a MySQL binary distribution, the command sequence looks like this:
 ```
 shell> groupadd mysql
@@ -82,8 +87,5 @@ shell> pip install django
 
 ## Acknowledgments
 
-
-* This assumes MySQL is being used. You can change what database that is being used by altering settings.py
-* Go to mysite/settings.py and go to lines 93-94 and change the MySQL username/password. 
 * This was a good learning process on the use of a MVC framework. 
 * In order to access the manager options, you need to log into the built in admin page and change the first user to be a manager. Following this, that manager can promote any other regular user to be a manager. Every registered account is defaulted to be a regular user at first. 
